@@ -1,0 +1,11 @@
+version: '3.2'
+
+services:
+  app:
+    build: .
+    container_name: springapp
+    command: demo-0.0.1-SNAPSHOT.jar
+    volumes:
+      - ../target/demo-0.0.1-SNAPSHOT.jar:/app/demo-0.0.1-SNAPSHOT.jar
+    ports:
+      - "8080:8080"
