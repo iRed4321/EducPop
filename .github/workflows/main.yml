@@ -46,6 +46,4 @@ jobs:
         username: ${{ secrets.DSM_USER }}
         key: ${{ secrets.DSM_KEY }}
         port: ${{ secrets.DSM_PORT }}
-        script: |
-          cd /volume1/EducPop
-          docker-compose down && docker-compose up -d
+        script: "cd /volume1/EducPop && docker-compose down && docker-compose up -d"
