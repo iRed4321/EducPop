@@ -18,8 +18,7 @@ services:
       - bbp-network
   
   db:
-    build:
-      dockerfile: ./docker/db.Dockerfile
+    image: postgres:16.1-alpine3.18
     container_name: bbp-db
     ports:
       - "5433:5432"
