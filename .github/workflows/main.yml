@@ -34,7 +34,7 @@ jobs:
           # POST_SCRIPT: "docker-compose up -d"
 
   restart:
-
+    needs: sync
     runs-on: ubuntu-latest
 
     steps:
