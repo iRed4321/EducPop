@@ -1,4 +1,4 @@
-package com.m2info.demo;
+package com.arwlowloh.bubblepop;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

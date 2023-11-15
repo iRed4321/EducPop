@@ -8,33 +8,41 @@
 		<version>3.1.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.m2info</groupId>
-	<artifactId>demo</artifactId>
+	<groupId>com.arwlowloh</groupId>
+	<artifactId>bubblepop</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>bubblepop</name>
-	<description>Tool to animate a debate</description>
+	<description>Tool to interact with your audience to brainstorm</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
 	</dependencies>
 
+	<packaging>jar</packaging>
 	<build>
+		<finalName>bubblepop</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

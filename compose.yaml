@@ -1,0 +1,41 @@
+version: '3.2'
+
+services:
+  app:
+    build:
+      dockerfile: ./docker/app.Dockerfile
+    container_name: bbp
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/app
+      SPRING_DATASOURCE_USERNAME: ${BBP_USER}
+      SPRING_DATASOURCE_PASSWORD: ${BBP_PASS}
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "2223:8080"
+    networks:
+      - bbp-network
+  
+  db:
+    build:
+      dockerfile: ./docker/db.Dockerfile
+    container_name: bbp-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: ${BBP_PASS}
+      POSTGRES_USER: ${BBP_USER}
+      POSTGRES_DB: app
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "app", "-U", "${BBP_USER}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - bbp-network
+
+networks:
+  default: null
+  bbp-network:
+    driver: bridge
