@@ -22,7 +22,7 @@ services:
       dockerfile: ./docker/db.Dockerfile
     container_name: bbp-db
     ports:
-      - "5432:5432"
+      - "5433:5432"
     environment:
       POSTGRES_PASSWORD: ${BBP_PASS}
       POSTGRES_USER: ${BBP_USER}
