@@ -14,8 +14,8 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  syncAndRun:
+    
+  sync:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -32,3 +32,20 @@ jobs:
           TARGET: ${{secrets.PATH}}
           # PRE_SCRIPT: "docker-compose down"
           # POST_SCRIPT: "docker-compose up -d"
+
+  restart:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: executing remote ssh 
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.DSM_USER }}
+        key: ${{ secrets.DSM_KEY }}
+        port: ${{ secrets.DSM_PORT }}
+        script: |
+          cd /volume1/EducPop
+          docker-compose down && docker-compose up -d
