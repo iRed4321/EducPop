@@ -27,5 +27,5 @@ jobs:
         env:
           HOST: ${{secrets.HOST}}
           USER: ${{secrets.USER}}
-          PASSWORD: ${{secrets.PASSWORD}}
+          PASSWORD: ${{secrets.PASS}}
           TARGET: ${{secrets.PATH}}
