@@ -18,7 +18,8 @@ services:
       - bbp-network
   
   db:
-    image: postgres:16.1-alpine3.18
+    build:
+      dockerfile: ./docker/db.Dockerfile
     container_name: bbp-db
     ports:
       - "5433:5432"
@@ -26,6 +27,8 @@ services:
       POSTGRES_PASSWORD: ${BBP_PASS}
       POSTGRES_USER: ${BBP_USER}
       POSTGRES_DB: app
+      POSTGRES_INITDB_ARGS: --locale-provider=icu --icu-locale=fr-FR
+      LANG: fr_FR.UTF-8
     healthcheck:
       test: [ "CMD", "pg_isready", "-q", "-d", "app", "-U", "${BBP_USER}" ]
       interval: 10s
@@ -37,4 +40,5 @@ services:
 networks:
   default: null
   bbp-network:
+    name: bbp-network
     driver: bridge
