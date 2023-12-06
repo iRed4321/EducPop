@@ -13,7 +13,7 @@ services:
       db:
         condition: service_healthy
     ports:
-      - "8080:8080"
+      - "2223:8080"
     networks:
       - bbp-network
   
