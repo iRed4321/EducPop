@@ -6,7 +6,7 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    const response = await fetch('api/customers');
+    const response = await fetch('http://localhost:8080/api/customers');
     const body = await response.json();
     this.setState({customers: body._embedded.customers});
   }
