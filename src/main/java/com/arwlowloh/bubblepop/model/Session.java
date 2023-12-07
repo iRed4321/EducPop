@@ -1,4 +1,4 @@
-package com.arwlowloh.bubblepop;
+package com.arwlowloh.bubblepop.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
