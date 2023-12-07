@@ -3,6 +3,11 @@ spring:
     url: jdbc:postgresql://localhost:5433/app
     username: user
     password: pass
+  data:
+    rest:
+      base-path: /api
+  thymeleaf:
+    check-template-location: false
   jpa:
     generate-ddl: true
     hibernate:
