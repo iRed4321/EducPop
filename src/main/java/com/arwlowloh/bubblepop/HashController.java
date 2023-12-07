@@ -26,6 +26,6 @@ public class HashController {
     public String createHash() {
 
         String hash = tokenService.getHash();
-        return hash;
+        return "Hash: " + hash;
     }
 }
