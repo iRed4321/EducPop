@@ -44,13 +44,10 @@ First you have to make the project frontend available by spring by running :
 mvn clean
 mvn clean
 mvn clean package -DskipTests
-```
-
-Then, you can do your modifications and run the server with :
-
-```bash
 mvn spring-boot:run
 ```
+Your backend is now available on [http://localhost:8080](http://localhost:8080) !
+Your changes will be automatically reloaded when you save your java files.
 
 ### Frontend Development
 
