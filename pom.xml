@@ -62,19 +62,13 @@
 				<configuration>
 				<filesets>
 					<fileset>
-						<directory>src/main/frontend/node</directory>
-					</fileset>
-					<fileset>
 						<directory>src/main/frontend/node_modules</directory>
 					</fileset>
 					<fileset>
 						<directory>src/main/frontend/build</directory>
 					</fileset>
 					<fileset>
-						<directory>src/main/resources/static/node</directory>
-					</fileset>
-					<fileset>
-						<directory>src/main/resources/static/static</directory>
+						<directory>src/main/resources/public</directory>
 					</fileset>
 				</filesets>
 				</configuration>
