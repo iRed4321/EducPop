@@ -68,4 +68,4 @@ npm start
 
 You are now ready to work on the frontend at localhost:3000. The server will automatically reload when you save your changes.
 
-**Note about Node:** The frontend is using node 21.4.0. If you have a much lower version, you can have bugs. In this case, you can either upgrade your node version or run ```build/node/npm start``` instead of ```npm start```.
+**Note about Node:** The frontend is using node 20.10.0. If you have a much lower version, you can have bugs. In this case, you can either upgrade your node version or run ```build/node/npm start``` instead of ```npm start```.
