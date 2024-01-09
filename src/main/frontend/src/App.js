@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import NotFound404 from "./pages/NotFound404";
 import Connect from "./pages/Connect"
 import CreateAccount from "./pages/CreateAccount"
+import Home from "./pages/Home"
 
 class App extends Component {
   state = {
@@ -10,27 +11,21 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    const response = await fetch('http://localhost:8080/api/customers');
-    const body = await response.json();
+    //const response = await fetch('http://localhost:8080/api/customers');
+    //const body = await response.json();
     //this.setState({customers: body._embedded.customers});
   }
 
   render() {
-    const {customers} = this.state;
+    //const {customers} = this.state;
     return (
       <div className="app">
       <Router>
           <div>
             <Routes>
-              {
-                /*
-<Route path="/login" element={<Connect/>}/>
-              <Route path="/signin" element={<CreateAccount/>}/>
               <Route path="/" element={<Home/>}/>
-
-                */
-              }
-              
+              <Route path="/signin" element={<CreateAccount/>}/>
+              <Route path="/login" element={<Connect/>}/>
               <Route path="*" element={<NotFound404/>}/>
             </Routes>
           </div>
