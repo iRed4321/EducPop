@@ -1,8 +1,8 @@
 import React, { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./styles.css";
+import "../App.css";
 
-//import  from "../components";
+import Logo from "../components/Logo";
 
 const root = createRoot(document.getElementById("root"));
 root.render(
@@ -22,3 +22,5 @@ root.render(
     
   </StrictMode>
 );
+
+export default root
