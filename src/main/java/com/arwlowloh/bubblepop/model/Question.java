@@ -28,6 +28,13 @@ public class Question {
         super();
     }
 
+    public Question(long id, String message, Session session) {
+        super();
+        this.id = id;
+        this.message = message;
+        this.session = session;
+    }
+
     public long getId() {
         return id;
     }
