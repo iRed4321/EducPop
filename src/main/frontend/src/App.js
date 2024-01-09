@@ -6,6 +6,7 @@ import CreateAccount from "./pages/CreateAccount"
 import Home from "./pages/Home"
 
 import "./styles/App.css"
+import GuestSession from './pages/GuestSession';
 
 class App extends Component {
   state = {
@@ -28,6 +29,8 @@ class App extends Component {
               <Route path="/" element={<Home/>}/>
               <Route path="/signin" element={<CreateAccount/>}/>
               <Route path="/login" element={<Connect/>}/>
+              <Route path="/signup" element={<CreateAccount/>}/>
+              <Route path="/guest" element={<GuestSession/>}/>
               <Route path="*" element={<NotFound404/>}/>
             </Routes>
           </div>
