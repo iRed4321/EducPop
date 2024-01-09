@@ -28,12 +28,27 @@ public class Session {
     private List<Question> questions;
 
     @ManyToOne
-    @JoinColumn(name="utilisateur_id")
+    @JoinColumn(name="utilisateur_id", nullable = false)
     private Utilisateur utilisateur;
+
+    public Session(long id, String nom, Utilisateur utilisateur) {
+        super();
+        this.id = id;
+        this.nom = nom;
+        this.utilisateur = utilisateur;
+    }
+
+    public Session(String nom, Utilisateur utilisateur) {
+        super();
+        this.nom = nom;
+        this.utilisateur = utilisateur;
+    }
 
     public Session() {
         super();
     }
+
+
     public long getId() {
         return id;
     }
@@ -64,5 +79,13 @@ public class Session {
 
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
+    }
+
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
     }
 }
