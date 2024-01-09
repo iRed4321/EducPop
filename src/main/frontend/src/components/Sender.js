@@ -1,0 +1,1 @@
+// Composant contenant un "label", un <input> avec un "placeholder" et un bouton pour envoyer le texte dans l'input.
