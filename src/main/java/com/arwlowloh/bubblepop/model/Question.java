@@ -7,7 +7,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
-import java.util.List;
 
 @Entity
 @Table(name = "question")
@@ -26,6 +25,13 @@ public class Question {
 
     public Question() {
         super();
+    }
+
+    public Question(long id, String message, Session session) {
+        super();
+        this.id = id;
+        this.message = message;
+        this.session = session;
     }
 
     public long getId() {

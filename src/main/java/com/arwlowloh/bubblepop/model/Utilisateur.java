@@ -38,6 +38,13 @@ public class Utilisateur {
         super();
     }
 
+    public Utilisateur(String nom, String mot_de_passe, String role) {
+        super();
+        this.nom = nom;
+        this.mot_de_passe = mot_de_passe;
+        this.role = role;
+    }
+
     public long getId() {
         return id;
     }
