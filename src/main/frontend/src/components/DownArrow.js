@@ -3,11 +3,12 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 import downarrow from "../assets/downarrow.png"
+import "../styles/components/DownArrow.css";
 
 class DownArrow extends React.Component {
   render() {
     return (
-      <Link ><img src={downarrow} alt="Flèche qui descend"/></Link>
+      <Link ><img className='downArrow' src={downarrow} alt="Flèche qui descend"/></Link>
     );
   }
 }

@@ -3,11 +3,12 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import logo from '../assets/bubblepop.png'
+import "../styles/components/Logo.css";
 
 class Logo extends React.Component {
   render() {
     return (
-      <Link to="/"><img src={logo} alt="Logo de l'application BubblePop"/></Link>
+      <Link className='logoLink' to="/"><img className='logoImg' src={logo} alt="Logo de l'application BubblePop"/></Link>
     );
   }
 }
