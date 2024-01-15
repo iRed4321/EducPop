@@ -31,7 +31,7 @@ public class JwtUtils {
   }
   
   private Key key() {
-    return Keys.hmacShaKeyFor(Decoders.BASE64.decode("1azerty"));
+    return Keys.hmacShaKeyFor(Decoders.BASE64.decode("1azertyhsndjokafqsnjkaefqsjknefqscjknaefqsdojlkefdjkneafqojlkaopmscbnqoaqslafeqjlshdjaejfqlqdl"));
   }
 
   public String getUserNameFromJwtToken(String token) {
