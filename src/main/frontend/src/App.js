@@ -1,4 +1,12 @@
 import React, { Component } from 'react';
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import NotFound404 from "./pages/NotFound404";
+import Connect from "./pages/Connect"
+import CreateAccount from "./pages/CreateAccount"
+import Home from "./pages/Home"
+
+import "./styles/App.css"
+import GuestSession from './pages/GuestSession';
 
 class App extends Component {
   state = {
@@ -6,15 +14,35 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    const response = await fetch('http://localhost:8080/api/customers');
-    const body = await response.json();
-    this.setState({customers: body._embedded.customers});
+    //const response = await fetch('http://localhost:8080/api/customers');
+    //const body = await response.json();
+    //this.setState({customers: body._embedded.customers});
   }
 
   render() {
-    const {customers} = this.state;
+    //const {customers} = this.state;
     return (
-        <div className="App">
+      <div className="app">
+      <Router>
+          <div>
+            <Routes>
+              <Route path="/" element={<Home/>}/>
+              <Route path="/signin" element={<CreateAccount/>}/>
+              <Route path="/login" element={<Connect/>}/>
+              <Route path="/signup" element={<CreateAccount/>}/>
+              <Route path="/guest" element={<GuestSession/>}/>
+              <Route path="*" element={<NotFound404/>}/>
+            </Routes>
+          </div>
+      </Router>
+      </div>
+    );
+  }
+}
+export default App;
+
+/*
+<div className="App">
           <header className="App-header">
             <div className="App-intro">
               <h2>Customers</h2>
@@ -28,7 +56,5 @@ class App extends Component {
             </div>
           </header>
         </div>
-    );
-  }
-}
-export default App;
+
+*/
