@@ -7,23 +7,34 @@ import "../styles/pages/Connect.css";
 import axios from "../axios.js";
 import { useState } from 'react';
 
-class Connect extends React.Component {
+const Connect = () => {
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    console.log("ça change")
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
 
-  handleLogin = async (e) => {
+  const handleLogin = async (e) => {
     //axios.post("/api/auth/perform_login2").catch(err => console.log(err));
-      var data={username:"ejacqui9",password:"passss"}
       try {
-        const response = await axios.post("/api/auth/perform_login", {username:"ejacqui9",password:"pass"});
+        const response = await axios.post("/api/auth/perform_login", formData);
     
         const token = response.data.token; 
         console.log('CEST BON');
       } catch (error) {
+        //there is an error
         console.error('Login failed:', error.message);
       }
   }
 
-  render() {
     return (
       <div id="connectPage">
         <div id="connectHeader">
@@ -35,16 +46,17 @@ class Connect extends React.Component {
         </div>
         <div id='connectBody'>
           <label for='username'>Nom d'utilisateur</label>
-          <wired-input id="username" placeholder="Nom d'utilisateur"></wired-input>
+          {/* <wired-input id="username" name="username" value={formData.username} onChange={handleChange} placeholder="Nom d'utilisateur"></wired-input> */}
+          <input id="username" name="username" value={formData.username} onChange={handleChange} placeholder="Nom d'utilisateur"></input>
           <label for="password">Mot de passe</label>
-          <wired-input type='password' id="password" placeholder="Mot de passe"></wired-input>
-          <wired-button id="connectButton" onClick={this.handleLogin}>Se connecter</wired-button >
+          {/* <wired-input type='password' name="password" id="password" value={formData.password} onChange={handleChange} placeholder="Mot de passe"></wired-input> */}
+          <input type='password' name="password" id="password" value={formData.password} onChange={handleChange} placeholder="Mot de passe"></input>
+          <wired-button id="connectButton" onClick={handleLogin}>Se connecter</wired-button >
           <p>Pas de compte ?<br/>
           Pas de soucis, s'en créer un, c'est par <Link to={"/signin"}>ici</Link></p>
         </div>
       </div>
     );
   }
-}
 
 export default Connect;
