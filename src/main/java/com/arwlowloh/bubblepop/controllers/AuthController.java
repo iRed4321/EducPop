@@ -74,6 +74,13 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
         }
     }
+
+    @GetMapping("/loginFromToken")
+    public Utilisateur loginFromToken(@RequestParam String token) {
+        String username = jwtUtils.getUserNameFromJwtToken(token);
+        return userRepository.findByNom(username);
+    }
+
   //@PostMapping("/signup")
   /*public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
     if (userRepository.existsByUsername(signUpRequest.getUsername())) {

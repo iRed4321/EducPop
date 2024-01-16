@@ -3,7 +3,6 @@ package com.arwlowloh.bubblepop;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.sqids.Sqids;
 
+import com.arwlowloh.bubblepop.controllers.AuthController;
 import com.arwlowloh.bubblepop.model.Diapo;
 import com.arwlowloh.bubblepop.model.Session;
 import com.arwlowloh.bubblepop.model.Utilisateur;
@@ -28,66 +28,53 @@ public class SessionController {
 
     private final HashMap<String, CurrentSession> sessions = new HashMap<>();
     Sqids sqids = Sqids.builder().minLength(5).build();
- 
-    @GetMapping("/session/join")
-    public ResponseEntity<Optional<String>> join(@RequestParam(required = false) String id) {
-
-        if (id == null) {
-            return new ResponseEntity<>(Optional.of("id is empty"), HttpStatus.BAD_REQUEST);
-        } else {
-
-            CurrentSession session = sessions.get(id);
-
-            if (session == null) {
-                return new ResponseEntity<>(Optional.of("Session " + id + " not found"), HttpStatus.BAD_REQUEST);
-            } else {
-                return new ResponseEntity<>(Optional.empty(), HttpStatus.OK);
-            }
-        }
-    }
+    
+    @Autowired
+    AuthController authController;
 
     @GetMapping("/session/{id}/close")
-    public ResponseEntity<Optional<String>> end(@PathVariable String id) {
+    public ResponseEntity<?> end(@PathVariable String id, @RequestParam(required = false) String token) {
         
         CurrentSession session = sessions.get(id);
 
         if (session == null) {
-            return new ResponseEntity<>(Optional.of("Session " + id + " not found"), HttpStatus.BAD_REQUEST);
-        } else {
+            return new ResponseEntity<>("Session " + id + " not found", HttpStatus.BAD_REQUEST);
+        } 
 
-            Session dbSession = new Session();
-            dbSession.setNom(session.getNom());
-            dbSession.setUtilisateur(session.getUtilisateur());
+        Utilisateur user = authController.loginFromToken(token);
 
-            List<Diapo> diapos = new ArrayList<>();
-            for (CurrDiapo diapo : session.getDiapos()) {
-                Diapo dbDiapo = diapo.convert();
-                dbDiapo.setSession(dbSession);
-                diapos.add(dbDiapo);
-            }
-
-            dbSession.setDiapos(diapos);
-
-            repo.save(dbSession);
-
-            sessions.remove(id);
-            return new ResponseEntity<>(Optional.empty(), HttpStatus.OK);
+        if (user == null || user.getId() != session.getUtilisateur().getId()) {
+            return new ResponseEntity<>("You are not the owner of this session", HttpStatus.UNAUTHORIZED);
         }
+
+        Session dbSession = new Session();
+        dbSession.setNom(session.getNom());
+        dbSession.setUtilisateur(session.getUtilisateur());
+
+        List<Diapo> diapos = new ArrayList<>();
+        for (CurrDiapo diapo : session.getDiapos()) {
+            Diapo dbDiapo = diapo.convert();
+            dbDiapo.setSession(dbSession);
+            diapos.add(dbDiapo);
+        }
+
+        dbSession.setDiapos(diapos);
+
+        repo.save(dbSession);
+
+        sessions.remove(id);
+        return ResponseEntity.ok(null);
 
     }
 
     @GetMapping("/session/open")
-    public ResponseEntity<String> createSession(@RequestParam(required = false) String userName, @RequestParam(required = false) String sessionName) {
+    public ResponseEntity<?> createSession(@RequestParam(required = false) String sessionName, @RequestParam(required = false) String token) {
 
-        if (userName == null || userName.isEmpty()) {
-            return new ResponseEntity<String>("name is empty, there must be a user creating this session", HttpStatus.BAD_REQUEST);
+        Utilisateur user = authController.loginFromToken(token);
+
+        if (user == null) {
+            return new ResponseEntity<>("You must be logged in to create a session", HttpStatus.UNAUTHORIZED);
         }
-
-        if (sessionName == null || sessionName.isEmpty()) {
-            return new ResponseEntity<String>("session name isn't set", HttpStatus.BAD_REQUEST);
-        }
-
-        Utilisateur user = new Utilisateur(userName, "pass", "role");
 
         long rd = (long) (Math.random() * 1000000000);
 
@@ -95,49 +82,80 @@ public class SessionController {
 
         sessions.put(id, new CurrentSession(user, sessionName));
 
-        return new ResponseEntity<String>(id, HttpStatus.OK);
+        return ResponseEntity.ok(id);
     }
 
     @GetMapping("/session/{id}/update")
-    public Pair<List<String>, HashMap<String, Integer>> update(@PathVariable String id) {
+    public ResponseEntity<?> update(@PathVariable String id, @RequestParam(required = false) String token) {
 
         CurrentSession session = sessions.get(id);
 
         if (session == null) {
-            return null;
+            return new ResponseEntity<>("Session " + id + " not found", HttpStatus.BAD_REQUEST);
         }
-        
-        return Pair.with(session.getQuestions(), session.getBulles());
+
+        Utilisateur user = authController.loginFromToken(token);
+
+        if (user == null || user.getId() != session.getUtilisateur().getId()) {
+            return new ResponseEntity<>("You are not the owner of this session", HttpStatus.UNAUTHORIZED);
+        }
+
+        if (user.getId() != session.getUtilisateur().getId()) {
+            return new ResponseEntity<>("You can't access this session results", HttpStatus.UNAUTHORIZED);
+        }
+
+        return ResponseEntity.ok(Pair.with(session.getQuestions(), session.getBulles()));
     }
 
     @GetMapping("/session/{id}/newDiapo")
-    public ResponseEntity<Optional<String>> newDiapo(@PathVariable String id) {
+    public ResponseEntity<?> newDiapo(@PathVariable String id, @RequestParam(required = false) String token) {
 
         CurrentSession session = sessions.get(id);
 
         if (session == null) {
-            return new ResponseEntity<>(Optional.of("Session " + id + " not found"), HttpStatus.BAD_REQUEST);
-        } else {
-            session.addDiapo();
-            return new ResponseEntity<>(Optional.empty(), HttpStatus.OK);
+            return new ResponseEntity<>("Session " + id + " not found", HttpStatus.BAD_REQUEST);
+        } 
+
+        Utilisateur user = authController.loginFromToken(token);
+
+        if (user == null || user.getId() != session.getUtilisateur().getId()) {
+            return new ResponseEntity<>("You are not the owner of this session", HttpStatus.UNAUTHORIZED);
         }
+
+        if (user.getId() != session.getUtilisateur().getId()) {
+            return new ResponseEntity<>("You are not the owner of this session", HttpStatus.UNAUTHORIZED);
+        }
+
+        session.addDiapo();
+        return ResponseEntity.ok(null);
+
     }
 
     @GetMapping("/session/{id}/setDiapo")
-    public ResponseEntity<Optional<String>> setDiapo(@PathVariable String id, @RequestParam int diapo) {
+    public ResponseEntity<?> setDiapo(@PathVariable String id, @RequestParam int diapo, @RequestParam(required = false) String token) {
 
         CurrentSession session = sessions.get(id);
 
         if (session == null) {
-            return new ResponseEntity<>(Optional.of("Session " + id + " not found"), HttpStatus.BAD_REQUEST);
-        } else {
-            session.setCurrentDiapo(diapo);
-            return new ResponseEntity<>(Optional.empty(), HttpStatus.OK);
+            return new ResponseEntity<>("Session " + id + " not found", HttpStatus.BAD_REQUEST);
+        } 
+
+        Utilisateur user = authController.loginFromToken(token);
+
+        if (user == null || user.getId() != session.getUtilisateur().getId()) {
+            return new ResponseEntity<>("You are not the owner of this session", HttpStatus.UNAUTHORIZED);
         }
+
+        if (user.getId() != session.getUtilisateur().getId()) {
+            return new ResponseEntity<>("You are not the owner of this session", HttpStatus.UNAUTHORIZED);
+        }
+
+        session.setCurrentDiapo(diapo);
+        return ResponseEntity.ok(null);
     }
  
     @GetMapping("/session/{id}/data")
-    public ResponseEntity<Optional<String>> receiveData(
+    public ResponseEntity<?> receiveData(
         @PathVariable String id,
         @RequestParam(required = false) String question,
         @RequestParam(required = false) String word
@@ -146,11 +164,11 @@ public class SessionController {
         CurrentSession session = sessions.get(id);
 
         if (session == null) {
-            return new ResponseEntity<>(Optional.of("Session " + id + " not found"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Session " + id + " not found", HttpStatus.BAD_REQUEST);
         } else {
 
             if (question != null && word != null) {
-                return new ResponseEntity<>(Optional.of("You can't send both a question and a word at the same time"), HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>("You can't send both a question and a word at the same time", HttpStatus.BAD_REQUEST);
             }
 
             if (question != null && !question.isEmpty()) {
@@ -164,20 +182,8 @@ public class SessionController {
                 }
             }
 
-            return new ResponseEntity<>(Optional.empty(), HttpStatus.OK);
+            return ResponseEntity.ok(null);
         }
-    }
-
-    @GetMapping("/session/list")
-    public String listSessions() {
-
-        String result = "";
-
-        for (CurrentSession session : sessions.values()) {
-            result += "Session made by " + session.getUtilisateur().getNom() + "\n";
-        }
-
-        return result;
     }
 
 }

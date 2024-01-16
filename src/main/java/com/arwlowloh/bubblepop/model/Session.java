@@ -18,7 +18,7 @@ public class Session {
     @GeneratedValue
     private long id;
 
-    @Column(name = "nom", nullable = false)
+    @Column(name = "nom", nullable = true)
     private String nom;
 
     @OneToMany(mappedBy="session")

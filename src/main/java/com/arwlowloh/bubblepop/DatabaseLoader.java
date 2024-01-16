@@ -39,8 +39,14 @@ public class DatabaseLoader implements CommandLineRunner {
 		elea.setNom("ejacqui9");
 		elea.setMot_de_passe(encoder.encode("pass"));
 		elea.setRole("USER");
-		//$2a$10$pSZqCr5OoKPEy6yit3BQlut6Zt7mbFOAYEF8XFWrJ6DxHqL8DoJMS
+
+
+		Utilisateur leo = new Utilisateur();
+		leo.setNom("leo");
+		leo.setMot_de_passe(encoder.encode("leo"));
+		leo.setRole("USER");
 
 		this.utilisateurRepository.save(elea);
+		this.utilisateurRepository.save(leo);
 	}
 }
