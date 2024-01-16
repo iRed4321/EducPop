@@ -24,8 +24,8 @@ public class Bulle {
     private int taille;
 
     @ManyToOne
-    @JoinColumn(name="session_id")
-    private Session session;
+    @JoinColumn(name="diapo_id")
+    private Diapo diapo;
 
     public Bulle() {
         super();
@@ -55,11 +55,11 @@ public class Bulle {
         this.taille = taille;
     }
 
-    public Session getSession() {
-        return session;
+    public Diapo getDiapo() {
+        return diapo;
     }
 
-    public void setSession(Session session) {
-        this.session = session;
+    public void setDiapo(Diapo diapo) {
+        this.diapo = diapo;
     }
 }

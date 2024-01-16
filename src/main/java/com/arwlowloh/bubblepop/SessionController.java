@@ -1,23 +1,23 @@
 package com.arwlowloh.bubblepop;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.sqids.Sqids;
 
-import com.arwlowloh.bubblepop.model.Bulle;
-import com.arwlowloh.bubblepop.model.Question;
+import com.arwlowloh.bubblepop.model.Diapo;
 import com.arwlowloh.bubblepop.model.Session;
 import com.arwlowloh.bubblepop.model.Utilisateur;
-import com.arwlowloh.bubblepop.repositories.BulleRepository;
-import com.arwlowloh.bubblepop.repositories.QuestionRepository;
 import com.arwlowloh.bubblepop.repositories.SessionRepository;
 
 @RestController
@@ -26,79 +26,65 @@ public class SessionController {
     @Autowired
     SessionRepository repo;
 
-    @Autowired
-    QuestionRepository questionRepo;
-
-    @Autowired
-    BulleRepository bulleRepo;
-
     private final HashMap<String, CurrentSession> sessions = new HashMap<>();
     Sqids sqids = Sqids.builder().minLength(5).build();
  
     @GetMapping("/session/join")
-    public String join(@RequestParam(required = false) String id) {
+    public ResponseEntity<Optional<String>> join(@RequestParam(required = false) String id) {
 
         if (id == null) {
-            return "Session ID is empty";
+            return new ResponseEntity<>(Optional.of("id is empty"), HttpStatus.BAD_REQUEST);
         } else {
 
             CurrentSession session = sessions.get(id);
 
             if (session == null) {
-                return "Session " + id + " not found";
+                return new ResponseEntity<>(Optional.of("Session " + id + " not found"), HttpStatus.BAD_REQUEST);
             } else {
-                return "Session " + id + " joined";
+                return new ResponseEntity<>(Optional.empty(), HttpStatus.OK);
             }
         }
     }
 
-    @GetMapping("/session/close/{id}")
-    public String end(@PathVariable String id) {
+    @GetMapping("/session/{id}/close")
+    public ResponseEntity<Optional<String>> end(@PathVariable String id) {
         
         CurrentSession session = sessions.get(id);
 
         if (session == null) {
-            return "Session " + id + " not found";
+            return new ResponseEntity<>(Optional.of("Session " + id + " not found"), HttpStatus.BAD_REQUEST);
         } else {
 
-            Session truc = new Session();
-            truc.setNom(session.getNom());
-            truc.setUtilisateur(session.getUtilisateur());
+            Session dbSession = new Session();
+            dbSession.setNom(session.getNom());
+            dbSession.setUtilisateur(session.getUtilisateur());
 
-            Session saved = repo.save(truc);
-
-            for (String q : session.getQuestions()) {
-
-                Question question = new Question();
-                question.setSession(saved);
-                question.setMessage(q);
-
-                questionRepo.save(question);
+            List<Diapo> diapos = new ArrayList<>();
+            for (CurrDiapo diapo : session.getDiapos()) {
+                Diapo dbDiapo = diapo.convert();
+                dbDiapo.setSession(dbSession);
+                diapos.add(dbDiapo);
             }
 
-            for (Map.Entry<String,Integer> w : session.getBulles().entrySet()) {
-                Bulle savedBulle = new Bulle();
-                savedBulle.setMot(w.getKey());
-                savedBulle.setTaille(w.getValue());
+            dbSession.setDiapos(diapos);
 
-                bulleRepo.save(savedBulle);
-            }
+            repo.save(dbSession);
 
             sessions.remove(id);
-            return "Session " + id + " closed";
+            return new ResponseEntity<>(Optional.empty(), HttpStatus.OK);
         }
 
     }
 
     @GetMapping("/session/open")
-    public String createSession(@RequestParam(required = false) String userName, @RequestParam(required = false) String sessionName) {
+    public ResponseEntity<String> createSession(@RequestParam(required = false) String userName, @RequestParam(required = false) String sessionName) {
 
         if (userName == null || userName.isEmpty()) {
-            return "name is empty, there must be a user creating this session";
+            return new ResponseEntity<String>("name is empty, there must be a user creating this session", HttpStatus.BAD_REQUEST);
         }
 
         if (sessionName == null || sessionName.isEmpty()) {
-            return "session name isn't set";
+            return new ResponseEntity<String>("session name isn't set", HttpStatus.BAD_REQUEST);
         }
 
         Utilisateur user = new Utilisateur(userName, "pass", "role");
@@ -109,7 +95,7 @@ public class SessionController {
 
         sessions.put(id, new CurrentSession(user, sessionName));
 
-        return "Session " + id + " created";
+        return new ResponseEntity<String>(id, HttpStatus.OK);
     }
 
     @GetMapping("/session/{id}/update")
@@ -120,13 +106,38 @@ public class SessionController {
         if (session == null) {
             return null;
         }
-
+        
         return Pair.with(session.getQuestions(), session.getBulles());
     }
- 
 
-    @GetMapping("/session/{id}")
-    public String getQuestion(
+    @GetMapping("/session/{id}/newDiapo")
+    public ResponseEntity<Optional<String>> newDiapo(@PathVariable String id) {
+
+        CurrentSession session = sessions.get(id);
+
+        if (session == null) {
+            return new ResponseEntity<>(Optional.of("Session " + id + " not found"), HttpStatus.BAD_REQUEST);
+        } else {
+            session.addDiapo();
+            return new ResponseEntity<>(Optional.empty(), HttpStatus.OK);
+        }
+    }
+
+    @GetMapping("/session/{id}/setDiapo")
+    public ResponseEntity<Optional<String>> setDiapo(@PathVariable String id, @RequestParam int diapo) {
+
+        CurrentSession session = sessions.get(id);
+
+        if (session == null) {
+            return new ResponseEntity<>(Optional.of("Session " + id + " not found"), HttpStatus.BAD_REQUEST);
+        } else {
+            session.setCurrentDiapo(diapo);
+            return new ResponseEntity<>(Optional.empty(), HttpStatus.OK);
+        }
+    }
+ 
+    @GetMapping("/session/{id}/data")
+    public ResponseEntity<Optional<String>> receiveData(
         @PathVariable String id,
         @RequestParam(required = false) String question,
         @RequestParam(required = false) String word
@@ -135,11 +146,11 @@ public class SessionController {
         CurrentSession session = sessions.get(id);
 
         if (session == null) {
-            return "Session " + id + " not found";
+            return new ResponseEntity<>(Optional.of("Session " + id + " not found"), HttpStatus.BAD_REQUEST);
         } else {
 
             if (question != null && word != null) {
-                return "Can't send both question and word";
+                return new ResponseEntity<>(Optional.of("You can't send both a question and a word at the same time"), HttpStatus.BAD_REQUEST);
             }
 
             if (question != null && !question.isEmpty()) {
@@ -153,18 +164,7 @@ public class SessionController {
                 }
             }
 
-            String result = "Questions :<br>";
-
-            for (String q : session.getQuestions()) {
-                result += q + "<br>";
-            }
-
-            result += "<br>Words :<br>";
-            for (String w : session.getBulles().keySet()) {
-                result += w + " : " + session.getBulles().get(w) + "<br>";
-            }
-
-            return result;
+            return new ResponseEntity<>(Optional.empty(), HttpStatus.OK);
         }
     }
 
