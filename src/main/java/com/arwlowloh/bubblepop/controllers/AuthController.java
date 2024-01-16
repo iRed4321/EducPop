@@ -2,6 +2,7 @@ package com.arwlowloh.bubblepop.controllers;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -15,6 +16,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +33,7 @@ import com.arwlowloh.bubblepop.security.jwt.JwtResponse;
 import com.arwlowloh.bubblepop.security.jwt.JwtUtils;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
+//@CrossOrigin("http://localhost:8080")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -49,18 +52,20 @@ public class AuthController {
   @Autowired
   JwtUtils jwtUtils;
 
-  @PostMapping("/login")
-  public ResponseEntity<?> login(@RequestBody Utilisateur loginForm) {
+  @PostMapping("/perform_login")
+  public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
         Authentication authentication = authenticationManager.authenticate(
-        new UsernamePasswordAuthenticationToken(loginForm.getNom(), loginForm.getMot_de_passe()));
+        new UsernamePasswordAuthenticationToken(credentials.get("username"), credentials.get("password")));
 
-        //SecurityContextHolder.getContext().setAuthentication(authentication);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
         String jwt = jwtUtils.generateJwtToken(authentication);
-        
-        return ResponseEntity.ok(new JwtResponse(jwt, loginForm.getNom()));
+        String isAuth ="non";
+        if(authentication.isAuthenticated()) isAuth=((UserDetailsImpl) authentication.getPrincipal()).getUtilisateur().getNom();
+        return ResponseEntity.ok(new JwtResponse(jwt, isAuth));
     }
 
-        @GetMapping("/validateToken")
+    @GetMapping("/validateToken")
     public ResponseEntity<?> validateToken(@RequestParam String token) {
         // Validate the JWT token
         if (jwtUtils.validateJwtToken(token)) {
