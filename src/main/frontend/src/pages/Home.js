@@ -1,5 +1,5 @@
 import React from 'react';
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import DownArrow from "../components/DownArrow"
 import Logo from "../components/Logo";
 import 'wired-elements';
@@ -14,14 +14,16 @@ class Home extends React.Component {
       <div id="homePage">
         <div id="homeHeader">
         <Logo />
-        <wired-button>Se connecter</wired-button>
+        <Link to="/login">
+        <wired-button id="toLoginButton">Se connecter</wired-button>
+        </Link>
         </div>
         <div id='homeBody'>
           <p>Rejoindre une session</p>
-          <wired-input placeholder="ID de la session"></wired-input>
-          <wired-button>Créer une session</wired-button>
+          <wired-input id="sessionJoinInput" placeholder="ID de la session"></wired-input>
+          <wired-button id="sessionCreateButton">Créer une session</wired-button>
           <div id='knowMore'>
-          <p>En savoir plus</p>
+          <p id="knowMoreText">En savoir plus</p>
           <DownArrow />
           </div>
         </div>

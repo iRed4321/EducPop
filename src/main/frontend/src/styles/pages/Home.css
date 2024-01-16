@@ -38,12 +38,21 @@
 
 }
 
+#toLoginButton {
+    padding: 0.5em;
+
+}
+
 #knowMore {
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin-top: 37vh;
+}
 
+#knowMoreText {
+    padding: 0em;
+    margin: 0em;
 }
