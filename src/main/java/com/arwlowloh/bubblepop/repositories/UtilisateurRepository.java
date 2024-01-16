@@ -9,4 +9,6 @@ import com.arwlowloh.bubblepop.model.Utilisateur;
 @CrossOrigin("http://localhost:3000")
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> {
     Utilisateur findByNom(String nom);
+
+    Boolean existsByNom(String nom);
 }

@@ -74,29 +74,25 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
         }
     }
-  //@PostMapping("/signup")
-  /*public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-    if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+  @PostMapping("/perform_signup")
+  public ResponseEntity<?> registerUser(@RequestBody Map<String, String> credentials) {
+    if (userRepository.existsByNom(credentials.get("username"))) {
       return ResponseEntity
           .badRequest()
-          .body(new MessageResponse("Error: Username is already taken!"));
+          .body("Error: Username is already taken!");
     }
 
-    if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+    if(!credentials.get("password").equals(credentials.get("passwordConfirm"))){
       return ResponseEntity
           .badRequest()
-          .body(new MessageResponse("Error: Email is already in use!"));
+          .body("Error: Password and password Confirm doesn't match!");
     }
 
     // Create new user's account
-    User user = new User(signUpRequest.getUsername(), 
-               signUpRequest.getEmail(),
-               encoder.encode(signUpRequest.getPassword()));
+    Utilisateur user = new Utilisateur(credentials.get("username"),
+               encoder.encode(credentials.get("password")), "USER");
 
-    Set<String> strRoles = signUpRequest.getRole();
-    Set<Role> roles = new HashSet<>();
-
-    if (strRoles == null) {
+    /*if (strRoles == null) {
       Role userRole = roleRepository.findByName(ERole.ROLE_USER)
           .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
       roles.add(userRole);
@@ -123,9 +119,9 @@ public class AuthController {
       });
     }
 
-    user.setRoles(roles);
+    user.setRoles(roles);*/
     userRepository.save(user);
 
-    return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-  }*/
+    return ResponseEntity.ok("User registered successfully!");
+  }
 }
