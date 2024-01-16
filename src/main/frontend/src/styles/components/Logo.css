@@ -1,0 +1,12 @@
+
+.logoLink {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logoImg {
+    width:  4rem;
+    height: 4rem;
+    margin-right: 0.5rem;
+}

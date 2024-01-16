@@ -1,0 +1,1 @@
+//Equivalent d'un div pour avoir le même type de bandeau à chaque page

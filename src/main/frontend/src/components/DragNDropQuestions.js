@@ -1,0 +1,1 @@
+// Composant qui permet d'afficher une question qu'on y dépose dans une nouvelle fenêtre (pour la rendre visible à l'écran de diaporama)
