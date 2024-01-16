@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import 'wired-elements';
 
 import Logo from "../components/Logo";
-import "../styles/pages/Connect.css";
+import "../styles/pages/Connect.scss";
 import axios from "../axios.js";
 import { useState } from 'react';
 

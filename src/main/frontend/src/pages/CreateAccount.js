@@ -3,7 +3,7 @@ import React from "react";
 import 'wired-elements';
 
 import Logo from "../components/Logo";
-import "../styles/pages/CreateAccount.css";
+import "../styles/pages/CreateAccount.scss";
 
 
 class CreateAccount extends React.Component {

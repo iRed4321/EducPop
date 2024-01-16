@@ -5,7 +5,7 @@ import Connect from "./pages/Connect"
 import CreateAccount from "./pages/CreateAccount"
 import Home from "./pages/Home"
 
-import "./styles/App.css"
+import "./styles/App.scss"
 import GuestSession from './pages/GuestSession';
 
 class App extends Component {

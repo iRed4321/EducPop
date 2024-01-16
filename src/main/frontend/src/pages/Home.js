@@ -4,7 +4,7 @@ import DownArrow from "../components/DownArrow"
 import Logo from "../components/Logo";
 import 'wired-elements';
 
-import "../styles/pages/Home.css";
+import "../styles/pages/Home.scss";
 
 
 
