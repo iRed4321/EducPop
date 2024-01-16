@@ -59,11 +59,10 @@ public class AuthController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        //UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String jwt = jwtUtils.generateJwtToken(authentication);
-        
-        
-        return ResponseEntity.ok(new JwtResponse(jwt, credentials.get("username")));
+        String isAuth ="non";
+        if(authentication.isAuthenticated()) isAuth=((UserDetailsImpl) authentication.getPrincipal()).getUtilisateur().getNom();
+        return ResponseEntity.ok(new JwtResponse(jwt, isAuth));
     }
 
     @GetMapping("/validateToken")
