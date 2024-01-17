@@ -24,9 +24,6 @@ const Connect = () => {
             formData.username = username;
             formData.password = password;
             const response = await axios.post("/api/auth/perform_login", formData);
-            if (response.status != 200) {
-                console.log('error:' + response.code);
-            }
             const token = response.data.accessToken;
             localStorage.setItem("accessToken", token);
         } catch (error) {

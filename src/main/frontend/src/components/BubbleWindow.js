@@ -6,21 +6,9 @@ import React from 'react';
 import { ReactP5Wrapper } from "@p5-wrapper/react";
 
 import "../styles/components/BubbleWindow.scss";
+import axios from '../axios';
 
-function sketch(p) {
-
-    function createHiPPICanvas(width, height) {
-    const ratio = window.devicePixelRatio;
-    const canvas = document.createElement("canvas");
-
-    canvas.width = width * ratio;
-    canvas.height = height * ratio;
-    canvas.style.width = width + "px";
-    canvas.style.height = height + "px";
-    canvas.getContext("2d").scale(ratio, ratio);
-
-    return canvas;
-    }
+async function sketch(p) {
 
     // set the canvas size to the size of the container
     let canvasWidth = document.getElementById("bubbleWindowContainer").offsetWidth;
@@ -33,7 +21,13 @@ function sketch(p) {
         ctx.canvas.height = canvasHeight - 20;
     }
 
-    var words = ['Noel', 'froid', 'Hiver', 'Sapin'];
+    // var words = ['Noel', 'froid', 'Hiver', 'Sapin'];
+    // get id from "/session/{id}/update"
+    let params = new URLSearchParams(document.location.search);
+    let id = params.get("id");
+    var recu = await axios.get("/session/"+id+"/update?token="+localStorage.getItem("accessToken"));
+    var words = recu.data.value1;
+    
     var words_and_placed = {};
     for (var i = 0; i < words.length; i++) {
       words_and_placed[words[i]] = false;
@@ -51,8 +45,10 @@ function sketch(p) {
       
       let fontSize = "1.6rem";
 
-      for (var i = 0; i < words.length; i++) {
-        var word = words[i];
+      for (var key in words) {
+        var word = key;
+        var occurence = word[key];
+
         if (words_and_placed[word]) {
             let [y,x,radiusX,radiusY] = words_pos[word];
 

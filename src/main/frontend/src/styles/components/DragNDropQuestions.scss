@@ -1,4 +1,17 @@
 
+#printQuestionContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#question {
+    margin: 0 auto;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
 #dragNDropQuestionsContainer {
   width: 100%;
   border-bottom: 4px solid black;
