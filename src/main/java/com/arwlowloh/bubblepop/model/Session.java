@@ -18,14 +18,11 @@ public class Session {
     @GeneratedValue
     private long id;
 
-    @Column(name = "nom", nullable = false)
+    @Column(name = "nom", nullable = true)
     private String nom;
 
     @OneToMany(mappedBy="session")
-    private List<Bulle> bulles;
-
-    @OneToMany(mappedBy="session")
-    private List<Question> questions;
+    private List<Diapo> diapos;
 
     @ManyToOne
     @JoinColumn(name="utilisateur_id", nullable = false)
@@ -72,19 +69,11 @@ public class Session {
         this.nom = nom;
     }
 
-    public List<Bulle> getBulles() {
-        return bulles;
+    public List<Diapo> getDiapos() {
+        return diapos;
     }
 
-    public void setBulles(List<Bulle> bulles) {
-        this.bulles = bulles;
-    }
-
-    public List<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
+    public void setDiapos(List<Diapo> diapos) {
+        this.diapos = diapos;
     }
 }

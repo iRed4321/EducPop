@@ -21,18 +21,18 @@ public class Question {
     private String message;
 
     @ManyToOne
-    @JoinColumn(name="session_id")
-    private Session session;
+    @JoinColumn(name="diapo_id")
+    private Diapo diapo;
 
     public Question() {
         super();
     }
 
-    public Question(long id, String message, Session session) {
+    public Question(long id, String message, Diapo diapo) {
         super();
         this.id = id;
         this.message = message;
-        this.session = session;
+        this.diapo = diapo;
     }
 
     public long getId() {
@@ -51,11 +51,11 @@ public class Question {
         this.message = message;
     }
 
-    public Session getSession() {
-        return session;
+    public Diapo getDiapo() {
+        return diapo;
     }
 
-    public void setSession(Session session) {
-        this.session = session;
+    public void setDiapo(Diapo diapo) {
+        this.diapo = diapo;
     }
 }
