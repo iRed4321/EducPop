@@ -84,6 +84,13 @@ public class CurrentSession {
     }
 
     /**
+     * Permet de passer à la dernière diapo
+     */
+    public void lastDiapo() {
+        currDiapo = diapos.size() - 1;
+    }
+
+    /**
      * Permet d'obtenir la liste des mots de la diapo en cours
      * @return
      */

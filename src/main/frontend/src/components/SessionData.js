@@ -16,6 +16,8 @@ const SessionData = () => {
             var params = new URLSearchParams(document.location.search);
             var id = params.get("id");
             const reponse = await axios.get("/session/"+id+"/newDiapo?token="+token);
+            const reponse2 = await axios.get("/session/"+id+"/lastDiapo?token="+token);
+            window.location.reload(false);
         } catch (error) {
             console.log(error);
         }

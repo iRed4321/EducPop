@@ -216,6 +216,35 @@ public class SessionController {
         return ResponseEntity.ok(null);
     }
 
+    /**
+     * Permet de définir la dernière diapo
+     * @param id l'identifiant de la session
+     * @param token le token JWT de l'utilisateur
+     * @return ResponseEntity contenant un message en cas d'erreur
+     */
+    @GetMapping("/session/{id}/lastDiapo")
+    public ResponseEntity<?> lastDiapo(@PathVariable String id, @RequestParam(required = false) String token) {
+
+        CurrentSession session = sessions.get(id);
+
+        if (session == null) {
+            return new ResponseEntity<>("Session " + id + " not found", HttpStatus.BAD_REQUEST);
+        } 
+
+        Utilisateur user = authController.loginFromToken(token);
+
+        if (user == null || user.getId() != session.getUtilisateur().getId()) {
+            return new ResponseEntity<>("You are not the owner of this session", HttpStatus.UNAUTHORIZED);
+        }
+
+        if (user.getId() != session.getUtilisateur().getId()) {
+            return new ResponseEntity<>("You are not the owner of this session", HttpStatus.UNAUTHORIZED);
+        }
+
+        session.lastDiapo();
+        return ResponseEntity.ok(null);
+    }
+
 
  
     /**
