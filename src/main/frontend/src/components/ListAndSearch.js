@@ -7,24 +7,33 @@ import Logo from "../components/Logo";
 // import "../styles/pages/Connect.css";
 import axios from "../axios.js";
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 const ListAndSearch = () => {
 
     const [sessionsData, setSessionData]=useState([]);
+    var sessions = [];
 
-    /*const retrieveSessions = async (e) => {
-        try {
-            const response = await axios.post("/session/", formData);
-            console.log(response.data);
-            //const token = response.data.token; 
-        } catch (error) {
-            //there is an error
-            console.error('Login failed:', error.message);
+    useEffect(() => {
+        const getInfo = async () => {
+            var token=localStorage.getItem("accessToken");
+            try {
+                const response = await axios.get("/session/saved?token="+token);
+                setSessionData(response.data);
+            } catch (error) {
+                //there is an error
+                console.error('Problem fetching sessions :', error.message);
+            }
+             
         }
-      }*/
+        getInfo();
+    });
     
-      const sessions = ['session1','session2','session2'];
-      const listItems = sessions.map((number) =>    <li><wired-button><Link to={"/login"}>{number} </Link></wired-button></li>  );
+
+
+
+      
+      const listItems = sessionsData.map((session) =>    <li><wired-button><Link to={"/login"}>{session.nom} </Link></wired-button></li>  );
     
         return (
           <div id="connectPage">

@@ -10,6 +10,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "utilisateur")
 public class Utilisateur {
@@ -31,6 +33,7 @@ public class Utilisateur {
     @JoinColumn(name="organisation_id")
     private Organisation organisation;
 
+    @JsonIgnore
     @OneToMany(mappedBy="utilisateur")
     private List<Session> sessions;
 

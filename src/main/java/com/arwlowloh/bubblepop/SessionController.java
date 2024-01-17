@@ -235,9 +235,17 @@ public class SessionController {
     public ResponseEntity<?> savedlist(@RequestParam(required = false) String token) {
 
         Utilisateur user = authController.loginFromToken(token);
-        List<Session> sessions = user.getSessions();
+        List<Session> sessionsdb = user.getSessions();
 
-        return ResponseEntity.ok(sessions);
+        List<CurrentSession> curr = new ArrayList<>();
+
+        /*for (Session sessdb : sessionsdb){
+            CurrentSession sess = new CurrentSession(sessdb);
+            sess.readOnly = true;
+            curr.add(sess);
+        }*/
+
+        return ResponseEntity.status(HttpStatus.OK).body(sessionsdb);
     }
 
     @GetMapping("/session/saved/load")
