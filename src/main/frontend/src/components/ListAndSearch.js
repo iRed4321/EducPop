@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import 'wired-elements';
 
 import Logo from "../components/Logo";
-import "../styles/pages/Connect.css";
+// import "../styles/pages/Connect.css";
 import axios from "../axios.js";
 import { useState } from 'react';
 
@@ -23,9 +23,6 @@ const ListAndSearch = () => {
         }
       }*/
     
-
-
-
       const sessions = ['session1','session2','session2'];
       const listItems = sessions.map((number) =>    <li><wired-button><Link to={"/login"}>{number} </Link></wired-button></li>  );
     
