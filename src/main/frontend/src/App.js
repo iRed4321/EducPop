@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import CreateAccount from './pages/CreateAccount';
-import Connect from './pages/Connect';
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import NotFound404 from "./pages/NotFound404";
+import Connect from "./pages/Connect"
+import CreateAccount from "./pages/CreateAccount"
+import HostSession from "./pages/HostSession"
+import Home from "./pages/Home"
+
+import "./styles/App.scss"
 import GuestSession from './pages/GuestSession';
-import NotFound404 from './pages/NotFound404';
 import PrintQuestion from "./pages/PrintQuestion";
 import SessionList from "./pages/SessionList";
 import DragNDropQuestions from "./components/DragNDropQuestions";
@@ -33,6 +36,7 @@ class App extends Component {
               <Route path="/signup" element={<CreateAccount/>}/>
               <Route path="/guest" element={<GuestSession/>}/>
               <Route path="/question" element={<PrintQuestion/>}/>
+              <Route path="/host_session" element={<HostSession/>}/>
               <Route path="/sessions" element={<SessionList/>}/>
               <Route path="*" element={<NotFound404/>}/>
             </Routes>

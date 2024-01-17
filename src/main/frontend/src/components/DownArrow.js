@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 import downarrow from "../assets/downarrow.png"
-import "../styles/components/DownArrow.css";
+import "../styles/components/DownArrow.scss";
 
 class DownArrow extends React.Component {
   render() {

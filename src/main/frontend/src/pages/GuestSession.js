@@ -3,7 +3,7 @@ import React from 'react';
 import Logo from "../components/Logo";
 import Sender from "../components/Sender"
 
-import "../styles/pages/GuestSession.css";
+import "../styles/pages/GuestSession.scss";
 
 class GuestSession extends React.Component {
   render() {
