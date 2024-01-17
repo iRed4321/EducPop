@@ -38,7 +38,7 @@ function PrintQuestion() {
 
     return (
         <div id="printQuestionContainer">
-            <DragNDropQuestions questions={questions} onDrop={handleDrop} />
+            <DragNDropQuestions displayDropZone={false} questions={questions} onDrop={handleDrop} />
         </div>
     );
 };

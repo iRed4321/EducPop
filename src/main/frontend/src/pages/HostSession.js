@@ -29,9 +29,9 @@ class HostSession extends React.Component {
             <BubbleWindow></BubbleWindow>
             <div id="dataAndQuestionsDropContainer">
             <SessionData></SessionData>
-            <DragNDropQuestions></DragNDropQuestions>
+            <DragNDropQuestions displayDropZone={true}> </DragNDropQuestions>
             </div>
-            <PrintQuestion></PrintQuestion>
+            <PrintQuestion displayDropZone={false}></PrintQuestion>
             </div>
             <BigQuestionPopUp></BigQuestionPopUp>
             </div>

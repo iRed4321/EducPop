@@ -21,16 +21,21 @@ async function sketch(p) {
         ctx.canvas.height = canvasHeight - 20;
     }
 
-    // var words = ['Noel', 'froid', 'Hiver', 'Sapin'];
+    var words = {
+        "Noel": 1,
+        "Sapin": 2,
+        "Cadeaux": 15,
+        "Pere Noel": 7,
+    }
     // get id from "/session/{id}/update"
     let params = new URLSearchParams(document.location.search);
     let id = params.get("id");
-    var recu = await axios.get("/session/"+id+"/update?token="+localStorage.getItem("accessToken"));
-    var words = recu.data.value1;
+    // var recu = await axios.get("/session/"+id+"/update?token="+localStorage.getItem("accessToken"));
+    // var words = recu.data.value1;
     
     var words_and_placed = {};
-    for (var i = 0; i < words.length; i++) {
-      words_and_placed[words[i]] = false;
+    for ( var key in words ) {
+      words_and_placed[key] = false;
     }
 
     var words_pos = {};
@@ -47,7 +52,8 @@ async function sketch(p) {
 
       for (var key in words) {
         var word = key;
-        var occurence = word[key];
+        var occurence = words[key];
+        var multiplier = Math.max(1,Math.log(Math.max(1,occurence/3))/Math.log(2));
 
         if (words_and_placed[word]) {
             let [y,x,radiusX,radiusY] = words_pos[word];
@@ -66,26 +72,35 @@ async function sketch(p) {
         else {
           words_and_placed[word] = true;
 
-          var radiusY = 35 // Replace 'radius' with 'radiusY'
-          var radiusX = word.length * 20; // Replace 'radius' with 'radiusX'
+          var radiusY = 30 // Replace 'radius' with 'radiusY'
+          var radiusX = word.length * 10; // Replace 'radius' with 'radiusX'
+          radiusX *= multiplier;
+          radiusY *= multiplier;
 
           var x = Math.random() * (canvas.width - 2 * radiusX) + radiusX;
           var y = Math.random() * (canvas.height - 2 * radiusY) + radiusY;
 
           // prevent collision with other words 
+          let maxTries = 10000;
+          let tries = 0;
           while (true) {
+            tries++;
+            if (tries > maxTries) {
+                console.log("Max tries reached");
+                break;
+            }
             var collision = false;
-            for (var j = 0; j < words.length; j++) {
-              if (i === j) {
+            for (var key2 in words_and_placed) {
+              if (key2 === word) {
                 continue;
               }
-              var word2 = words[j];
+              var word2 = key2;
               if (words_and_placed[word2]) {
                 let [y2,x2,radiusX2,radiusY2] = words_pos[word2];
                 var dx = x - x2;
                 var dy = y - y2;
                 var distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < radiusX + radiusX2) {
+                if (distance < radiusX + radiusX2 || distance < radiusY + radiusY2) {
                   collision = true;
                   break;
                 }
