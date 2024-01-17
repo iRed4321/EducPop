@@ -17,10 +17,16 @@ const Sidebar = () => {
 
   const navigate = useNavigate();
 
-  const removeUser = () => {
-    const response = axios.get("/removeUser?token="+localStorage.getItem("accessToken"));
-    localStorage.removeItem("accessToken");
-    navigate("/");
+  const removeUser = async () => {
+    try {
+        const response = await axios.post("/api/auth/removeUtilisateur?token="+localStorage.getItem("accessToken"));
+        localStorage.removeItem("accessToken");
+        navigate("/");
+        console.log("User deleted");
+    } catch (error) {
+        //there is an error
+        console.error('Problem removing user :', error.message);
+    }
   }
 
   const logOut = () => {
