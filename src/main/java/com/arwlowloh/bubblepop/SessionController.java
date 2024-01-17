@@ -56,6 +56,9 @@ public class SessionController {
         Session dbSession = new Session();
         dbSession.setNom(session.getNom());
         dbSession.setUtilisateur(session.getUtilisateur());
+        if (session.dbId != null) {
+            dbSession.setId(session.dbId);
+        }
 
         List<Diapo> diapos = new ArrayList<>();
         for (CurrDiapo diapo : session.getDiapos()) {
