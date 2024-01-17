@@ -10,7 +10,6 @@ function PrintQuestion() {
 
     useEffect(() => {
 
-
         const getQuestions = async () => {
 
             let params = new URLSearchParams(document.location.search);
@@ -18,6 +17,7 @@ function PrintQuestion() {
             try {
                 const recu = await axios.get("/session/"+id+"/update?token="+localStorage.getItem("accessToken"));
                 const questionsR = recu.data.value0;
+                await new Promise(r => setTimeout(r, 1000));
                 setQuestions(questionsR);
             } catch (error) {
                 //there is an error

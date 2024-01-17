@@ -2,9 +2,6 @@ import {useDrag} from "react-dnd";
 import React from "react";
 import "../styles/components/DropQuestion.css";
 
-
-
-
 const Question = ({ id, text, index, moveQuestion }) => {
 
     const generateRandomName = () => {
@@ -14,8 +11,6 @@ const Question = ({ id, text, index, moveQuestion }) => {
         let randomNum = Math.floor(Math.random() * 100);
         return randomName + randomNum;
     }
-
-
 
     const [{ isDragging }, drag] = useDrag({
         type: 'QUESTION',
@@ -27,7 +22,7 @@ const Question = ({ id, text, index, moveQuestion }) => {
 
     return (
         <div id="question" ref={(node) => drag(node)} >
-            <p id="questionUser"> {generateRandomName()} </p>
+            {/* <p id="questionUser"> {generateRandomName()} </p> */}
             <p id="questionText" p>{text}</p>
         </div>
     );

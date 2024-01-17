@@ -35,17 +35,8 @@ async function sketch(p) {
     localStorage.removeItem("words_pos");
     localStorage.removeItem("words_and_placed");
   }
-  // var recu = await axios.get("/session/" + id + "/update?token=" + localStorage.getItem("accessToken"));
-  // var words = recu.data.value1;
-
-  var words = {
-      "bonjour": 1,
-      "salut": 2,
-      "Guten Tag": 5,
-  };
-
-
-
+  var recu = await axios.get("/session/" + id + "/update?token=" + localStorage.getItem("accessToken"));
+  var words = recu.data.value1;
   var words_and_placed = {};
   for (var key in words) {
     words_and_placed[key] = false;
@@ -161,16 +152,27 @@ async function sketch(p) {
 
 const BubbleWindow = () => {
 
-  const [time, setTime] = useState(Date.now());
+  const [bulles, setBulles] = useState([]);
 
   useEffect(() => {
 
+    const getBulles = async () => {
 
-    const interval = setInterval(() => setTime(Date.now()), 1000);
-    return () => {
-      clearInterval(interval);
+      let params = new URLSearchParams(document.location.search);
+      let id = params.get("id");
+      try {
+        var recu = await axios.get("/session/" + id + "/update?token=" + localStorage.getItem("accessToken"));
+        var words = recu.data.value1;
+        //wait 2 seconds
+        await new Promise(r => setTimeout(r, 1000));
+        setBulles(words);
+      } catch (error) {
+        console.error('Problem fetching questions :', error.message);
+      }
     };
-  }, []);
+
+    getBulles();
+  });
 
   const nextDiapo = async () => {
     try {
@@ -198,7 +200,7 @@ const BubbleWindow = () => {
 
   return (
     <div id="bubbleWindowContainer">
-      <ReactP5Wrapper sketch={sketch} />
+      <ReactP5Wrapper sketch={(p) => sketch(p)}></ReactP5Wrapper>
       <div id="bubbleWindowButtons">
         <wired-icon-button id="bubbleWindowButtonPrev" onClick={prevDiapo}> ←  </wired-icon-button>
         <wired-icon-button id="bubbleWindowButtonNext" onClick={nextDiapo}> → </wired-icon-button>

@@ -15,6 +15,7 @@ public class CurrentSession {
     private List<CurrDiapo> diapos;
     private int currDiapo = 0;
     Long dbId = null;
+    Boolean viewerOpened = false;
 
     CurrentSession(Utilisateur utilisateur, String nom) {
         this.utilisateur = utilisateur;
