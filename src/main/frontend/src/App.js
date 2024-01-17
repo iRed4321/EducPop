@@ -37,6 +37,7 @@ class App extends Component {
               <Route path="/guest" element={<GuestSession/>}/>
               <Route path="/host_session" element={<HostSession/>}/>
               <Route path="/sessions" element={<SessionList/>}/>
+              <Route path="/viewer" element={<ViewerTab/>}/>
               <Route path="*" element={<NotFound404/>}/>
             </Routes>
           </div>

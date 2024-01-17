@@ -13,10 +13,7 @@ import { useState, useEffect } from "react";
 
 import "../styles/pages/HostSession.scss";
 
-const HostSession = () => {
-
-    url = "http://localhost:3000/viewer?id=" + id;
-    window.open(url, "_blank", "noreferrer");
+const ViewerTab = () => {
 
     const [time, setTime] = useState(Date.now());
 
@@ -27,27 +24,12 @@ const HostSession = () => {
       };
     }, []);
 
-    let params = new URLSearchParams(document.location.search);
-    let id = "#" + params.get("id");
-
     return (
-        <div id="hostSessionPage">
-        <Banner>
-        <Sidebar></Sidebar>
-        <SessionJoiner code={id}></SessionJoiner>
-        </Banner>
         <div id="hostSessionBody">
         <BubbleWindow>{time}</BubbleWindow>
-        <div id="dataAndQuestionsDropContainer">
-        <SessionData></SessionData>
-        <DragNDropQuestions displayDropZone={true}> </DragNDropQuestions>
-        </div>
-        <PrintQuestion displayDropZone={false}></PrintQuestion>
-        </div>
-        <BigQuestionPopUp></BigQuestionPopUp>
         </div>
     );
 
 }
 
-export default HostSession;
+export default ViewerTab;
