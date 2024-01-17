@@ -16,11 +16,15 @@ import "../styles/pages/HostSession.scss";
 class HostSession extends React.Component {
 
     render() { // Session joiner is the component that contact the session code and the QR code
+
+        let params = new URLSearchParams(document.location.search);
+        let id = "#" + params.get("id");
+
         return (
             <div id="hostSessionPage">
             <Banner>
             <Sidebar></Sidebar>
-            <SessionJoiner code="#JRKCC"></SessionJoiner>
+            <SessionJoiner code={id}></SessionJoiner>
             </Banner>
             <div id="hostSessionBody">
             <BubbleWindow></BubbleWindow>

@@ -12,7 +12,6 @@ import axios from '../axios.js';
             let id = params.get("id");
             let data = dataWritten.current.value;
             const reponse = await axios.get("/session/"+id+"/data?"+props.route+"="+data);
-            console.log(reponse.status);
         } catch (error) {
             
         }

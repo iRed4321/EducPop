@@ -7,10 +7,14 @@ import "../styles/components/QRCode.scss";
 
 class QRcode extends React.Component {
 
+    
     generateQRCode() {
-        QRCODE.toCanvas(document.getElementById('QRCodeCanvas'), "hello", function (error) {
+
+        let params = new URLSearchParams(document.location.search);
+        let url = "localhost:3000/guest?id=" + params.get("id");
+
+        QRCODE.toCanvas(document.getElementById('QRCodeCanvas'), url, function (error) {
             if (error) console.error(error);
-            console.log('success!');
         })
     }
 
