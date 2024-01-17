@@ -24,11 +24,11 @@ const Connect = () => {
             formData.username = username;
             formData.password = password;
             const response = await axios.post("/api/auth/perform_login", formData);
-            if (response.code !== 200) {
-                console.log('error');
+            if (response.status != 200) {
+                console.log('error:' + response.code);
             }
-            console.log(response.data);
-            const token = response.data.token; 
+            const token = response.data.accessToken;
+            localStorage.setItem("accessToken", token);
         } catch (error) {
             //there is an error
             console.error('Login failed:', error.message);
@@ -41,7 +41,7 @@ const Connect = () => {
         <Logo />
         <div id='returnHome'>
         <p id="returnHomeText">Retour à l'accueil</p>
-        <wired-icon-button uid> -> </wired-icon-button>
+        <wired-icon-button uid> -{'>'} </wired-icon-button>
         </div>
         </div>
         <div id='connectBody'>
