@@ -8,7 +8,11 @@ import jakarta.persistence.Table;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
+
+import java.util.ArrayList;
 import java.util.List;
+
+import com.arwlowloh.bubblepop.CurrDiapo;
 
 @Entity
 @Table(name = "session")
@@ -37,12 +41,14 @@ public class Session {
         this.id = id;
         this.nom = nom;
         this.utilisateur = utilisateur;
+        this.diapos=new ArrayList<Diapo>();
     }
 
     public Session(String nom, Utilisateur utilisateur) {
         super();
         this.nom = nom;
         this.utilisateur = utilisateur;
+        this.diapos=new ArrayList<Diapo>();
     }
 
     public Utilisateur getUtilisateur() {
@@ -75,5 +81,9 @@ public class Session {
 
     public void setDiapos(List<Diapo> diapos) {
         this.diapos = diapos;
+    }
+
+    public void addDiapo() {
+        diapos.add(new Diapo());
     }
 }
