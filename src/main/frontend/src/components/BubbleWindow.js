@@ -10,19 +10,6 @@ import axios from '../axios';
 
 async function sketch(p) {
 
-    function createHiPPICanvas(width, height) {
-    const ratio = window.devicePixelRatio;
-    const canvas = document.createElement("canvas");
-
-    canvas.width = width * ratio;
-    canvas.height = height * ratio;
-    canvas.style.width = width + "px";
-    canvas.style.height = height + "px";
-    canvas.getContext("2d").scale(ratio, ratio);
-
-    return canvas;
-    }
-
     // set the canvas size to the size of the container
     let canvasWidth = document.getElementById("bubbleWindowContainer").offsetWidth;
     let canvasHeight = document.getElementById("bubbleWindowContainer").offsetHeight;
