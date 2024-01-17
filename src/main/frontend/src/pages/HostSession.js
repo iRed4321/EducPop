@@ -7,6 +7,7 @@ import SessionData from "../components/SessionData";
 import DragNDropQuestions from "../components/DragNDropQuestions";
 import MessageWindow from "../components/MessageWindow";
 import BigQuestionPopUp from "../components/BigQuestionPopUp";
+import Sidebar from "../components/Sidebar";
 
 import "../styles/pages/HostSession.scss";
 
@@ -17,7 +18,7 @@ class HostSession extends React.Component {
         return (
             <div id="hostSessionPage">
             <Banner>
-            <Menu/>
+            <Sidebar></Sidebar>
             <SessionJoiner code="#JRKCC"></SessionJoiner>
             </Banner>
             <div id="hostSessionBody">

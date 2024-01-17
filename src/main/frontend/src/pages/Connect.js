@@ -14,25 +14,8 @@ const Connect = () => {
 
   let usernameInput = React.createRef();
   let passwordInput = React.createRef();
-   
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-  });
 
-
-  const handleChange = (e) => {
-    console.log("ça change")
-    let formData = { ...formData };
-    this.setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-
-
-    const handleLogin = async (e) => {
+  const handleLogin = async (e) => {
         try {
             e.preventDefault();
             let username = usernameInput.current.value;
@@ -41,6 +24,9 @@ const Connect = () => {
             formData.username = username;
             formData.password = password;
             const response = await axios.post("/api/auth/perform_login", formData);
+            if (response.code !== 200) {
+                console.log('error');
+            }
             console.log(response.data);
             const token = response.data.token; 
         } catch (error) {
@@ -54,8 +40,8 @@ const Connect = () => {
         <div id="connectHeader">
         <Logo />
         <div id='returnHome'>
-        <p id="retkurnHomeText">Retour à l'accueil</p>
-        <button uid>right arrow</button>
+        <p id="returnHomeText">Retour à l'accueil</p>
+        <wired-icon-button uid> -> </wired-icon-button>
         </div>
         </div>
         <div id='connectBody'>
@@ -69,7 +55,7 @@ const Connect = () => {
             */}
         <wired-button id="connectButton" onClick={handleLogin}>Se connecter</wired-button >
         <p id="createAccountText">Pas de compte ?<br/>
-        Pas de soucis, s'en créer un, c'est par <Link to={"/signin"}>ici</Link></p>
+        Pas de soucis, s'en créer un, c'est par <Link to={"/signup"}>ici</Link></p>
         </div>
         </div>
     );

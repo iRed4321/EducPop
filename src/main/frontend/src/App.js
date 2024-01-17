@@ -33,7 +33,6 @@ class App extends Component {
               <Route path="/" element={<Home/>}/>
               <Route path="/signup" element={<CreateAccount/>}/>
               <Route path="/login" element={<Connect/>}/>
-              <Route path="/signup" element={<CreateAccount/>}/>
               <Route path="/guest" element={<GuestSession/>}/>
               <Route path="/question" element={<PrintQuestion/>}/>
               <Route path="/host_session" element={<HostSession/>}/>

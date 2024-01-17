@@ -7,7 +7,6 @@ import 'wired-elements';
 import "../styles/pages/Home.scss";
 
 
-
 class Home extends React.Component {
   render() {
     return (
