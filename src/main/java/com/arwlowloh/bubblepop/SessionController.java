@@ -224,4 +224,33 @@ public class SessionController {
         }
     }
 
+    @GetMapping("/session/saved")
+    public ResponseEntity<?> savedlist(@RequestParam(required = false) String token) {
+
+        Utilisateur user = authController.loginFromToken(token);
+        List<Session> sessions = user.getSessions();
+
+        return ResponseEntity.ok(sessions);
+    }
+
+    @GetMapping("/session/saved/load")
+    public ResponseEntity<?> load(@RequestParam(required = false) String token, @RequestParam long id) {
+
+        Utilisateur user = authController.loginFromToken(token);
+        List<Session> savedSessions = user.getSessions();
+
+        for (Session session : savedSessions) {
+            if (session.getId() == id) {
+                long rd = (long) (Math.random() * 1000000000);
+                String squidId = sqids.encode(List.of(rd));
+
+                sessions.put(squidId, new CurrentSession(session));
+        
+                return ResponseEntity.ok(squidId);
+            }
+        }
+
+        return new ResponseEntity<>("Session not found", HttpStatus.BAD_REQUEST);
+    }
+
 }

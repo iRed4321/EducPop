@@ -27,6 +27,20 @@ public class CurrDiapo {
         return questions;
     }
 
+    CurrDiapo() {
+        super();
+    }
+
+    CurrDiapo(Diapo diapo){
+        super();
+        for (Question q : diapo.getQuestions()) {
+            questions.add(q.getMessage());
+        }
+        for (Bulle b : diapo.getBulles()) {
+            bulles.put(b.getMot(), b.getTaille());
+        }
+    }
+
 
     /**
      * Permet de changer une diapo en cours en une diapo enregistrable dans la base de données

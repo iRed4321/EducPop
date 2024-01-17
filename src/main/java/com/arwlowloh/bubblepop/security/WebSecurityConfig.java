@@ -54,6 +54,11 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
     return new BCryptPasswordEncoder();
   }
   
+  /**
+   * Permet de configurer les autorisations d'accès aux ressources backend de l'application.
+   * @param http l'objet HttpSecurity à configurer
+   * @return SecurityFilterChain
+   */
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.csrf(csrf -> csrf.disable())
