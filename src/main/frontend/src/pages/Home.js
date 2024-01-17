@@ -72,7 +72,8 @@ const Home = () => {
         <p>
           Chez <i>Awrlowloh</i>, nous sommes convaincus que les gens n'ont pas besoin de transactions financières entre eux pour s'entendre et
           faire du monde un endroit meilleur. La motivation que procure la collaboration pure et simple alliée à la passion, c'est ça qui peut faire la différence.
-          Donc on veut rester proche de cette sphère. C'est pourquoi nous travaillons principalement avec et pour les associations du développement durable.
+          Donc on veut rester proche de cette sphère. C'est pourquoi nous travaillons principalement avec et pour les associations du développement durable, 
+          celles qui disposent de certification qui nous prouvent qu'objectivement, elles sont une nécessité pour notre société.
         </p>
         <div className='certifications'>
           <img className='quoteLogo' src={rainforest} alt="logo de la certification Rainforest Alliance" />
