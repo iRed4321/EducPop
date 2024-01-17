@@ -8,8 +8,8 @@ class Menu extends React.Component {
     return (
         <div id="menuId">
             Menu
-            <div id="menuButtonBarId"></div>
-            <div id="menuButtonBarId"></div>
+            <div id="menuButtonBarId" > <p> Voir ses sessions </p> </div>
+            <div id="menuButtonBarId"> <p> Supprimer son compte </p> </div>
             <div id="menuButtonBarId"></div>
         </div>
     );

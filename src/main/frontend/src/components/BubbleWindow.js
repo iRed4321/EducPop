@@ -39,14 +39,14 @@ function sketch(p) {
         var word = words[i];
         if (words_and_placed[word]) {
             let [y,x,radiusX,radiusY] = words_pos[word];
-            ctx.fillStyle = '#000';
+            // set up the outline to 333 and the inside to white
+
             ctx.beginPath();
             ctx.ellipse(x, y, radiusX, radiusY, 0, 0, 2 * Math.PI); // Use 'ellipse' instead of 'arc'
+            ctx.fillWidth = 3;
+            ctx.stroke();
             words_pos[word] = [y,x,radiusX,radiusY];
-            ctx.fill();
-
-            ctx.fillStyle = '#fff';
-            ctx.font = '48px sans-serif';
+            ctx.font = '48px indieFlower'; 
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillText(word, x, y);
@@ -55,7 +55,7 @@ function sketch(p) {
         else {
           words_and_placed[word] = true;
 
-          var radiusY = 30; // Replace 'radius' with 'radiusY'
+          var radiusY = 35 // Replace 'radius' with 'radiusY'
           var radiusX = word.length * 20; // Replace 'radius' with 'radiusX'
 
           var x = Math.random() * (canvas.width - 2 * radiusX) + radiusX;
@@ -90,6 +90,7 @@ function sketch(p) {
           }
 
           ctx.fillStyle = '#000';
+          ctx.lineWidth = 5;
           ctx.beginPath();
           ctx.ellipse(x, y, radiusX, radiusY, 0, 0, 2 * Math.PI); // Use 'ellipse' instead of 'arc'
           words_pos[word] = [y,x,radiusX,radiusY];
@@ -107,7 +108,6 @@ function sketch(p) {
     p.draw = () => {
         p.drawP();
     }
-
 
 }
 

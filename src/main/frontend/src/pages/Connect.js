@@ -54,8 +54,8 @@ const Connect = () => {
         <div id="connectHeader">
         <Logo />
         <div id='returnHome'>
-        <p id="retkurnHomeText">Retour à l'accueil</p>
-        <button uid>right arrow</button>
+        <p id="returnHomeText">Retour à l'accueil</p>
+        <wired-icon-button uid> -> </wired-icon-button>
         </div>
         </div>
         <div id='connectBody'>
