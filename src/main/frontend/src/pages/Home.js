@@ -28,7 +28,6 @@ const Home = () => {
       <div id="homePage">
         <div id="homeHeader">
         <Sidebar></Sidebar>
-        <Logo />
         <Link to="/login">
         {
             // check if we have accesToken in localStorage

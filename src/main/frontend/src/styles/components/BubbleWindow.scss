@@ -4,8 +4,15 @@
 }
 
 #bubbleWindowContainer {
-    height: 100%;
+    height: 90%;
     width: 55%;
     border-right: 4px solid black;
 }
 
+#bubbleWindowButtons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    border-right: 4px solid black;
+}

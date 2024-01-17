@@ -66,11 +66,21 @@ public class CurrentSession {
     }
 
     /**
-     * Permet de définir la diapo en cours
-     * @param currDiapo l'indice de la diapo à définir comme courante
+     * Permet de passer à la diapo suivante
      */
-    public void setCurrentDiapo(int currDiapo) {
-        this.currDiapo = currDiapo;
+    public void nextDiapo() {
+        if (currDiapo < diapos.size() - 1) {
+            currDiapo++;
+        }
+    }
+
+    /**
+     * Permet de passer à la diapo précédente
+     */
+    public void prevDiapo() {
+        if (currDiapo > 0) {
+            currDiapo--;
+        }
     }
 
     /**

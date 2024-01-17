@@ -159,14 +159,13 @@ public class SessionController {
     }
 
     /**
-     * Permet de définir la diapo courante
+     * Permet de définir la diapo suivante
      * @param id l'identifiant de la session
-     * @param diapo le numéro de la diapo
      * @param token le token JWT de l'utilisateur
      * @return ResponseEntity contenant un message en cas d'erreur
      */
-    @GetMapping("/session/{id}/setDiapo")
-    public ResponseEntity<?> setDiapo(@PathVariable String id, @RequestParam int diapo, @RequestParam(required = false) String token) {
+    @GetMapping("/session/{id}/nextDiapo")
+    public ResponseEntity<?> nextDiapo(@PathVariable String id, @RequestParam(required = false) String token) {
 
         CurrentSession session = sessions.get(id);
 
@@ -184,9 +183,40 @@ public class SessionController {
             return new ResponseEntity<>("You are not the owner of this session", HttpStatus.UNAUTHORIZED);
         }
 
-        session.setCurrentDiapo(diapo);
+        session.nextDiapo();
         return ResponseEntity.ok(null);
     }
+
+    /**
+     * Permet de définir la diapo précédente
+     * @param id l'identifiant de la session
+     * @param token le token JWT de l'utilisateur
+     * @return ResponseEntity contenant un message en cas d'erreur
+     */
+    @GetMapping("/session/{id}/prevDiapo")
+    public ResponseEntity<?> prevDiapo(@PathVariable String id, @RequestParam(required = false) String token) {
+
+        CurrentSession session = sessions.get(id);
+
+        if (session == null) {
+            return new ResponseEntity<>("Session " + id + " not found", HttpStatus.BAD_REQUEST);
+        } 
+
+        Utilisateur user = authController.loginFromToken(token);
+
+        if (user == null || user.getId() != session.getUtilisateur().getId()) {
+            return new ResponseEntity<>("You are not the owner of this session", HttpStatus.UNAUTHORIZED);
+        }
+
+        if (user.getId() != session.getUtilisateur().getId()) {
+            return new ResponseEntity<>("You are not the owner of this session", HttpStatus.UNAUTHORIZED);
+        }
+
+        session.prevDiapo();
+        return ResponseEntity.ok(null);
+    }
+
+
  
     /**
      * Permet de recevoir les données envoyées par les participants
