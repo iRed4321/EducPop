@@ -27,7 +27,7 @@ function PrintQuestion() {
 
         getQuestions();
   
-    },[]);
+    });
 
     const q = questions.map((question, index) => ({ id: index+1, text: question }));
     //console.log(q);

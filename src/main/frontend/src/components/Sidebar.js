@@ -23,6 +23,11 @@ const Sidebar = () => {
     navigate("/");
   }
 
+  const logOut = () => {
+    localStorage.removeItem("accessToken");
+    navigate("/");
+  }
+
     const [menuOpenState, setMenuOpenState] = useState(false);
 
     useEffect(() => {
@@ -46,9 +51,7 @@ const Sidebar = () => {
             <Link className="menu-item" to="/sessions">
             Voir ses sessions
             </Link>
-            <Link className="menu-item" to="/coucouLeo">
-            Se déconnecter
-            </Link>
+            <wired-button className="menu-item" onClick={logOut}>Se déconnecter</wired-button>
             <wired-button className="menu-item" onClick={removeUser}>Supprimer son compte</wired-button>
             </Menu>
         );
