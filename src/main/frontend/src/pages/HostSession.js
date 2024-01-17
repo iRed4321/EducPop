@@ -9,34 +9,41 @@ import BigQuestionPopUp from "../components/BigQuestionPopUp";
 import Sidebar from "../components/Sidebar";
 import PrintQuestion from "../components/PrintQuestion";
 
+import { useState, useEffect } from "react";
+
 import "../styles/pages/HostSession.scss";
 
+const HostSession = () => {
 
-class HostSession extends React.Component {
+    const [time, setTime] = useState(Date.now());
 
-    render() { // Session joiner is the component that contact the session code and the QR code
+    useEffect(() => {
+      const interval = setInterval(() => setTime(Date.now()), 1000)
+      return () => {
+        clearInterval(interval);
+      };
+    }, []);
 
-        let params = new URLSearchParams(document.location.search);
-        let id = "#" + params.get("id");
+    let params = new URLSearchParams(document.location.search);
+    let id = "#" + params.get("id");
 
-        return (
-            <div id="hostSessionPage">
-            <Banner>
-            <Sidebar></Sidebar>
-            <SessionJoiner code={id}></SessionJoiner>
-            </Banner>
-            <div id="hostSessionBody">
-            <BubbleWindow></BubbleWindow>
-            <div id="dataAndQuestionsDropContainer">
-            <SessionData></SessionData>
-            <DragNDropQuestions displayDropZone={true}> </DragNDropQuestions>
-            </div>
-            <PrintQuestion displayDropZone={false}></PrintQuestion>
-            </div>
-            <BigQuestionPopUp></BigQuestionPopUp>
-            </div>
-        );
-    }
+    return (
+        <div id="hostSessionPage">
+        <Banner>
+        <Sidebar></Sidebar>
+        <SessionJoiner code={id}></SessionJoiner>
+        </Banner>
+        <div id="hostSessionBody">
+        <BubbleWindow>{time}</BubbleWindow>
+        <div id="dataAndQuestionsDropContainer">
+        <SessionData></SessionData>
+        <DragNDropQuestions displayDropZone={true}> </DragNDropQuestions>
+        </div>
+        <PrintQuestion displayDropZone={false}></PrintQuestion>
+        </div>
+        <BigQuestionPopUp></BigQuestionPopUp>
+        </div>
+    );
 
 }
 
