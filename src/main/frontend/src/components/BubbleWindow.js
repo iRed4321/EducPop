@@ -8,6 +8,8 @@ import { ReactP5Wrapper } from "@p5-wrapper/react";
 import "../styles/components/BubbleWindow.scss";
 import axios from '../axios';
 
+import { useState, useEffect } from 'react';
+
 async function sketch(p) {
 
     // set the canvas size to the size of the container
@@ -21,17 +23,12 @@ async function sketch(p) {
         ctx.canvas.height = canvasHeight - 20;
     }
 
-    var words = {
-        "Noel": 1,
-        "Sapin": 2,
-        "Cadeaux": 15,
-        "Pere Noel": 7,
-    }
+
     // get id from "/session/{id}/update"
     let params = new URLSearchParams(document.location.search);
     let id = params.get("id");
-    // var recu = await axios.get("/session/"+id+"/update?token="+localStorage.getItem("accessToken"));
-    // var words = recu.data.value1;
+    var recu = await axios.get("/session/"+id+"/update?token="+localStorage.getItem("accessToken"));
+    var words = recu.data.value1;
     
     var words_and_placed = {};
     for ( var key in words ) {
@@ -137,15 +134,23 @@ async function sketch(p) {
 
 }
 
-class BubbleWindow extends React.Component {
 
-    render() {
-        return (
-            <div id="bubbleWindowContainer">
-            <ReactP5Wrapper sketch={sketch} />
-            </div>
-        );
-    }
+const BubbleWindow = () => {
+
+  const [time, setTime] = useState(Date.now());
+
+  useEffect(() => {
+    const interval = setInterval(() => setTime(Date.now()), 1000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  return (
+      <div id="bubbleWindowContainer">
+      <ReactP5Wrapper sketch={sketch} />
+      </div>
+  );
 }
 
 export default BubbleWindow;
