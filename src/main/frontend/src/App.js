@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import NotFound404 from "./pages/NotFound404";
 import Connect from "./pages/Connect"
 import CreateAccount from "./pages/CreateAccount"
+import HostSession from "./pages/HostSession"
 import Home from "./pages/Home"
 
 import "./styles/App.scss"
@@ -31,6 +32,7 @@ class App extends Component {
               <Route path="/login" element={<Connect/>}/>
               <Route path="/signup" element={<CreateAccount/>}/>
               <Route path="/guest" element={<GuestSession/>}/>
+              <Route path="/host_session" element={<HostSession/>}/>
               <Route path="*" element={<NotFound404/>}/>
             </Routes>
           </div>
