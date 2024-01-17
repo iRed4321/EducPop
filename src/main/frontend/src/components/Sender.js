@@ -2,6 +2,8 @@
 import React from 'react';
 import axios from '../axios.js';
 
+import "../styles/components/Sender.scss";
+
  const Sender = (props) => {
 
     const dataWritten = React.createRef();
@@ -19,11 +21,11 @@ import axios from '../axios.js';
     }
 
     return (
-        <>
+        <div className="senderContainer">
             <p>{props.label}</p>
-            <input placeholder={props.placeholder} ref={dataWritten}></input>
-            <button onClick={handleSendData}>Envoyer</button>
-        </>
+            <wired-input className="senderInput" placeholder={props.placeholder} ref={dataWritten}></wired-input>
+            <wired-button className="senderButton" onClick={handleSendData}>Envoyer</wired-button>
+        </div>
     );
 }
 

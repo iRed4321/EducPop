@@ -1,0 +1,37 @@
+
+.senderContainer {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+
+    p {
+        font-size: 3.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    wired-input {
+        margin-bottom: 1.5rem;
+    }
+
+    wired-button {
+        font-size: 2.5rem;
+    }
+
+    margin-bottom: 1.5rem;
+
+}
+
+.senderInput {
+
+    padding-bottom: 1.5rem;
+
+
+}
+
+.senderButton {
+
+    padding-top: 1.5rem;
+
+}

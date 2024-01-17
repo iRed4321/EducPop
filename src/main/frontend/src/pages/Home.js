@@ -16,7 +16,11 @@ class Home extends React.Component {
         <Sidebar></Sidebar>
         <Logo />
         <Link to="/login">
-        <wired-button id="toLoginButton">Se connecter</wired-button>
+        {
+            // check if we have accesToken in localStorage
+            // if not, we display the login button
+            localStorage.getItem("accessToken") ? <div></div> : <wired-button id="toLoginButton">Se connecter</wired-button>
+        }
         </Link>
         </div>
         
