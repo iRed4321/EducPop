@@ -28,6 +28,7 @@ public class CurrentSession {
         this.nom = session.getNom();
         this.diapos = new ArrayList<>();
         this.dbId = session.getId();
+        this.currDiapo=0;
         for (int i = 0; i < session.getDiapos().size(); i++) {
             diapos.add(new CurrDiapo(session.getDiapos().get(i)));
         }

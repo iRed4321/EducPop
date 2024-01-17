@@ -3,29 +3,36 @@ import React, { useState, useEffect } from 'react';
 import DragNDropQuestions from '../components/DragNDropQuestions';
 import axios from '../axios.js';
 
+
 function PrintQuestion() {
 
     const [questions, setQuestions] = useState([]);
 
     useEffect(() => {
 
+
         const getQuestions = async () => {
+
             let params = new URLSearchParams(document.location.search);
             let id = params.get("id");
-            const recu = await axios.get("/session/"+id+"/update?token="+localStorage.getItem("accessToken"));
-            const questionsR = recu.data.value0;
-
-            
-            
-            setQuestions(questionsR);
+            try {
+                const recu = await axios.get("/session/"+id+"/update?token="+localStorage.getItem("accessToken"));
+                const questionsR = recu.data.value0;
+                setQuestions(questionsR);
+            } catch (error) {
+                //there is an error
+                console.error('Problem fetching questions :', error.message);
+            }
          };
 
         getQuestions();
   
-    }, []);
+    },[]);
 
-    var q = questions.map((question, index) => ({ id: index+1, text: question }));
-    console.log(q);
+    const q = questions.map((question, index) => ({ id: index+1, text: question }));
+    //console.log(q);
+    const questions2 = [{id:1, text:"oui"},{id:2, text:"non"}]
+    //console.log(questions2);
 
     const handleDrop = (questionId) => {
         const newWindow = window.open('', '_blank');
@@ -37,8 +44,8 @@ function PrintQuestion() {
     };
 
     return (
-        <div id="printQuestionContainer">
-            <DragNDropQuestions displayDropZone={false} questions={questions} onDrop={handleDrop} />
+        <div id="printQuestionContainer" >
+            <DragNDropQuestions displayDropZone={false} questions={q} onDrop={handleDrop} />
         </div>
     );
 };
