@@ -13,7 +13,8 @@ const Question = ({ id, text, index, moveQuestion }) => {
 
     return (
         <div id="question" ref={(node) => drag(node)} >
-            {text}
+            <p id="questionUser"> @Ours23 </p>
+            <p id="questionText" p>{text}</p>
         </div>
     );
 };
