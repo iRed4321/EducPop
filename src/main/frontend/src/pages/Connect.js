@@ -69,7 +69,7 @@ const Connect = () => {
             */}
         <wired-button id="connectButton" onClick={handleLogin}>Se connecter</wired-button >
         <p id="createAccountText">Pas de compte ?<br/>
-        Pas de soucis, s'en créer un, c'est par <Link to={"/signin"}>ici</Link></p>
+        Pas de soucis, s'en créer un, c'est par <Link to={"/signup"}>ici</Link></p>
         </div>
         </div>
     );
