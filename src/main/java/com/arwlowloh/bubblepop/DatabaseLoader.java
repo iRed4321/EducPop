@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import com.arwlowloh.bubblepop.model.Session;
 import com.arwlowloh.bubblepop.model.Utilisateur;
+import com.arwlowloh.bubblepop.repositories.SessionRepository;
 import com.arwlowloh.bubblepop.repositories.UtilisateurRepository;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,9 +18,12 @@ public class DatabaseLoader implements CommandLineRunner {
 
 	private final UtilisateurRepository utilisateurRepository;
 
-	public DatabaseLoader(CustomerRepository repository, UtilisateurRepository utilisateurRepository) {
+	private final SessionRepository sessionRepository;
+
+	public DatabaseLoader(CustomerRepository repository, UtilisateurRepository utilisateurRepository, SessionRepository sessionRepository) {
 		this.repository = repository;
 		this.utilisateurRepository = utilisateurRepository;
+		this.sessionRepository = sessionRepository;
 	}
 
 	@Autowired
@@ -48,5 +53,8 @@ public class DatabaseLoader implements CommandLineRunner {
 
 		this.utilisateurRepository.save(elea);
 		this.utilisateurRepository.save(leo);
+
+		Session session1 = new Session("session A",elea);
+		this.sessionRepository.save(session1);
 	}
 }
