@@ -137,15 +137,6 @@ async function sketch(p) {
 
 const BubbleWindow = () => {
 
-  const [time, setTime] = useState(Date.now());
-
-  useEffect(() => {
-    const interval = setInterval(() => setTime(Date.now()), 1000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
-
   return (
       <div id="bubbleWindowContainer">
       <ReactP5Wrapper sketch={sketch} />
