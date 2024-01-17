@@ -7,7 +7,6 @@ import "../styles/pages/Connect.scss";
 import axios from "../axios.js";
 
 
-import { useState } from 'react';
 
 const Connect = () => {
 
@@ -38,7 +37,7 @@ const Connect = () => {
         <Logo />
         <div id='returnHome'>
         <p id="returnHomeText">Retour à l'accueil</p>
-        <wired-icon-button uid> -{'>'} </wired-icon-button>
+        <Link to={"/"}><wired-icon-button id="returnHomeButton" icon="home">→</wired-icon-button></Link>
         </div>
         </div>
         <div id='connectBody'>

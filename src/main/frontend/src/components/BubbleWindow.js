@@ -134,7 +134,6 @@ async function sketch(p) {
 
 }
 
-
 const BubbleWindow = () => {
 
   const [time, setTime] = useState(Date.now());
@@ -146,11 +145,15 @@ const BubbleWindow = () => {
     };
   }, []);
 
-  return (
-      <div id="bubbleWindowContainer">
-      <ReactP5Wrapper sketch={sketch} />
-      </div>
-  );
+        return (
+            <div id="bubbleWindowContainer">
+            <ReactP5Wrapper sketch={sketch} />
+            <div id="bubbleWindowButtons">
+            <wired-icon-button id="bubbleWindowButtonNext" > → </wired-icon-button>
+            <wired-icon-button id="bubbleWindowButtonPrev"> ←  </wired-icon-button>
+            </div>
+            </div>
+        );
 }
 
 export default BubbleWindow;
