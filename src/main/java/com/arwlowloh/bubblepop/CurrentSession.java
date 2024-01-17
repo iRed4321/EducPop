@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.arwlowloh.bubblepop.model.Session;
 import com.arwlowloh.bubblepop.model.Utilisateur;
 
 public class CurrentSession {
@@ -13,11 +14,20 @@ public class CurrentSession {
     private List<CurrDiapo> diapos;
     private int currDiapo = 0;
 
-    public CurrentSession(Utilisateur utilisateur, String nom) {
+    CurrentSession(Utilisateur utilisateur, String nom) {
         this.utilisateur = utilisateur;
         this.nom = nom;
         this.diapos = new ArrayList<>();
         diapos.add(new CurrDiapo());
+    }
+
+    CurrentSession(Session session){
+        this.utilisateur = session.getUtilisateur();
+        this.nom = session.getNom();
+        this.diapos = new ArrayList<>();
+        for (int i = 0; i < session.getDiapos().size(); i++) {
+            diapos.add(new CurrDiapo(session.getDiapos().get(i)));
+        }
     }
 
     /**
