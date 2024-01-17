@@ -107,8 +107,12 @@ public class AuthController {
    * Permet de supprimer un utilisateur ainsi que ses données
    */
   @GetMapping("/removeUser")
-  public ResponseEntity<?> removeUser(@RequestParam String username) {
+  public ResponseEntity<?> removeUser(@RequestParam String token) {
+    String username = jwtUtils.getUserNameFromJwtToken(token);
     Utilisateur user = userRepository.findByNom(username);
+    if (user == null) {
+      return ResponseEntity.badRequest().body("Error: User not found!");
+    }
     userRepository.delete(user);
     return ResponseEntity.ok("User deleted successfully!");
   }
