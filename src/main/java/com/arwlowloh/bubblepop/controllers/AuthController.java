@@ -102,6 +102,17 @@ public class AuthController {
     return userRepository.findByNom(username);
   }
 
+
+  /**
+   * Permet de supprimer un utilisateur ainsi que ses données
+   */
+  @GetMapping("/removeUser")
+  public ResponseEntity<?> removeUser(@RequestParam String username) {
+    Utilisateur user = userRepository.findByNom(username);
+    userRepository.delete(user);
+    return ResponseEntity.ok("User deleted successfully!");
+  }
+
   /**
    * Cette méthode permet de s'inscrire à l'application
    * 
