@@ -27,8 +27,24 @@ async function sketch(p) {
   // get id from "/session/{id}/update"
   let params = new URLSearchParams(document.location.search);
   let id = params.get("id");
-  var recu = await axios.get("/session/" + id + "/update?token=" + localStorage.getItem("accessToken"));
-  var words = recu.data.value1;
+  if (localStorage.getItem("session_id") == undefined) {
+    localStorage.setItem("session_id", id);
+  }
+  else if (localStorage.getItem("session_id") != id) {
+    localStorage.setItem("session_id", id);
+    localStorage.removeItem("words_pos");
+    localStorage.removeItem("words_and_placed");
+  }
+  // var recu = await axios.get("/session/" + id + "/update?token=" + localStorage.getItem("accessToken"));
+  // var words = recu.data.value1;
+
+  var words = {
+      "bonjour": 1,
+      "salut": 2,
+      "Guten Tag": 5,
+  };
+
+
 
   var words_and_placed = {};
   for (var key in words) {
@@ -36,6 +52,13 @@ async function sketch(p) {
   }
 
   var words_pos = {};
+
+  if (localStorage.getItem("words_pos") != undefined) {
+    words_pos = JSON.parse(localStorage.getItem("words_pos"));
+  }
+  if (localStorage.getItem("words_and_placed") != undefined) {
+    words_and_placed = JSON.parse(localStorage.getItem("words_and_placed"));
+  }
 
   p.drawP = () => {
     var canvas = p.canvas;
@@ -117,6 +140,8 @@ async function sketch(p) {
         ctx.beginPath();
         ctx.ellipse(x, y, radiusX, radiusY, 0, 0, 2 * Math.PI); // Use 'ellipse' instead of 'arc'
         words_pos[word] = [y, x, radiusX, radiusY];
+        localStorage.setItem("words_pos", JSON.stringify(words_pos));
+        localStorage.setItem("words_and_placed", JSON.stringify(words_and_placed));
         ctx.fill();
 
         ctx.fillStyle = '#fff';
@@ -139,6 +164,8 @@ const BubbleWindow = () => {
   const [time, setTime] = useState(Date.now());
 
   useEffect(() => {
+
+
     const interval = setInterval(() => setTime(Date.now()), 1000);
     return () => {
       clearInterval(interval);
