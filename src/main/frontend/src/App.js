@@ -8,9 +8,10 @@ import Home from "./pages/Home"
 
 import "./styles/App.scss"
 import GuestSession from './pages/GuestSession';
-import PrintQuestion from "./pages/PrintQuestion";
 import SessionList from "./pages/SessionList";
 import DragNDropQuestions from "./components/DragNDropQuestions";
+
+// <Route path="/question" element={<PrintQuestion/>}/>
 
 class App extends Component {
   state = {
@@ -34,7 +35,6 @@ class App extends Component {
               <Route path="/signup" element={<CreateAccount/>}/>
               <Route path="/login" element={<Connect/>}/>
               <Route path="/guest" element={<GuestSession/>}/>
-              <Route path="/question" element={<PrintQuestion/>}/>
               <Route path="/host_session" element={<HostSession/>}/>
               <Route path="/sessions" element={<SessionList/>}/>
               <Route path="*" element={<NotFound404/>}/>

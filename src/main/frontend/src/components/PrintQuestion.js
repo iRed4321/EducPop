@@ -19,8 +19,7 @@ const PrintQuestion = () => {
     };
 
     return (
-        <div>
-            <h2>Questions</h2>
+        <div id="printQuestionContainer">
             <DragNDropQuestions questions={questions} onDrop={handleDrop} />
         </div>
     );

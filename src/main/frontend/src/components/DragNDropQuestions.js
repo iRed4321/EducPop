@@ -5,6 +5,8 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import Question from "./Question";
 import DropZone from "./DropZone";
 
+import "../styles/components/DragNDropQuestions.scss";
+
 
 
 const DragNDropQuestions = ({ questions = [], onDrop }) => {
@@ -21,8 +23,7 @@ const DragNDropQuestions = ({ questions = [], onDrop }) => {
         <DndProvider backend={HTML5Backend}>
             {orderedQuestions.map((question, index) => (
                 <Question key={question.id} id={question.id} text={question.text} index={index} moveQuestion={moveQuestion} />
-            ))}
-            <DropZone onDrop={onDrop} />
+            ))} 
         </DndProvider>
     );
 };

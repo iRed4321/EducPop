@@ -8,6 +8,7 @@ import DragNDropQuestions from "../components/DragNDropQuestions";
 import MessageWindow from "../components/MessageWindow";
 import BigQuestionPopUp from "../components/BigQuestionPopUp";
 import Sidebar from "../components/Sidebar";
+import PrintQuestion from "../components/PrintQuestion";
 
 import "../styles/pages/HostSession.scss";
 
@@ -27,7 +28,7 @@ class HostSession extends React.Component {
             <SessionData></SessionData>
             <DragNDropQuestions></DragNDropQuestions>
             </div>
-            <MessageWindow></MessageWindow>
+            <PrintQuestion></PrintQuestion>
             </div>
             <BigQuestionPopUp></BigQuestionPopUp>
             </div>
