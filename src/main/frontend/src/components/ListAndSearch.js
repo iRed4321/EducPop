@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import 'wired-elements';
 
 import Logo from "../components/Logo";
-import "../styles/pages/Connect.css";
+// import "../styles/pages/Connect.css";
 import axios from "../axios.js";
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -14,24 +14,7 @@ const ListAndSearch = () => {
     const [sessionsData, setSessionData]=useState([]);
     var sessions = [];
 
-    const retriveSessions = async (e) => {
-        var token=localStorage.getItem("accessToken");
-        console.log(localStorage);
-        try {
-            console.log("req : /session/saved "+token);
-            const response = await axios.get("/session/saved?token="+token);
-            sessions=response.data;
-            
-
-            
-        } catch (error) {
-            //there is an error
-            console.error('Problem fetching sessions :', error.message);
-        }
-    }
-
     useEffect(() => {
-        //retriveSessions();
         const getInfo = async () => {
             var token=localStorage.getItem("accessToken");
             try {

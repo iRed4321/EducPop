@@ -1,18 +1,30 @@
 // Composant contenant un "label", un <input> avec un "placeholder" et un bouton pour envoyer le texte dans l'input.
 import React from 'react';
+import axios from '../axios.js';
 
+ const Sender = (props) => {
 
-class Sender extends React.Component {
+    const dataWritten = React.createRef();
 
-    render() {
-        return (
-            <>
-                <p>{this.props.label}</p>
-                <input placeholder={this.props.placeholder}></input>
-                <button>Envoyer</button>
-            </>
-        );
+    const handleSendData = async (e) => {
+        try {
+            let params = new URLSearchParams(document.location.search);
+            let id = params.get("id");
+            let data = dataWritten.current.value;
+            const reponse = await axios.get("/session/"+id+"/data?"+props.route+"="+data);
+            console.log(reponse.status);
+        } catch (error) {
+            
+        }
     }
+
+    return (
+        <>
+            <p>{props.label}</p>
+            <input placeholder={props.placeholder} ref={dataWritten}></input>
+            <button onClick={handleSendData}>Envoyer</button>
+        </>
+    );
 }
 
 export default Sender;

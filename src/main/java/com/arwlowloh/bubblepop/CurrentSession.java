@@ -14,6 +14,7 @@ public class CurrentSession {
     String nom;
     private List<CurrDiapo> diapos;
     private int currDiapo = 0;
+    Long dbId = null;
 
     CurrentSession(Utilisateur utilisateur, String nom) {
         this.utilisateur = utilisateur;
@@ -26,9 +27,11 @@ public class CurrentSession {
         this.utilisateur = session.getUtilisateur();
         this.nom = session.getNom();
         this.diapos = new ArrayList<>();
+        this.dbId = session.getId();
         for (int i = 0; i < session.getDiapos().size(); i++) {
             diapos.add(new CurrDiapo(session.getDiapos().get(i)));
         }
+
     }
 
     /**

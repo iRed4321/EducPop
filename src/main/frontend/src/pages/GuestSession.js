@@ -13,8 +13,8 @@ class GuestSession extends React.Component {
         <Logo/>
         </div>
         <div id="guestSessionBody">
-        <Sender label="Mots :" placeholder="Ecrivez un mot ici" route=""></Sender>
-        <Sender label="Question ?" placeholder="Une question ?" route=""></Sender>
+        <Sender label="Mots :" placeholder="Ecrivez un mot ici" route="word"></Sender>
+        <Sender label="Question ?" placeholder="Une question ?" route="question"></Sender>
         </div>
       </div>
     );
