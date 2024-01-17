@@ -8,7 +8,6 @@ import DropZone from "./DropZone";
 import "../styles/components/DragNDropQuestions.scss";
 
 
-
 const DragNDropQuestions = ({ questions = [], onDrop }) => {
     const [orderedQuestions, setOrderedQuestions] = useState(questions);
 
@@ -24,6 +23,7 @@ const DragNDropQuestions = ({ questions = [], onDrop }) => {
             {orderedQuestions.map((question, index) => (
                 <Question key={question.id} id={question.id} text={question.text} index={index} moveQuestion={moveQuestion} />
             ))} 
+        <DropZone onDrop={onDrop} />
         </DndProvider>
     );
 };

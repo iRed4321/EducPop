@@ -1,22 +1,34 @@
 import React from 'react';
 import { slide as Menu } from 'react-burger-menu';
+import { Link } from "react-router-dom";
 
 import "../styles/components/Sidebar.scss";
 
 const Sidebar = () => {
-  return (
-    <Menu>
-      <a className="menu-item" href="/">
+
+  if(localStorage.getItem("accessToken")!=undefined){
+    return (<Menu>
+      <Link className="menu-item" to="/">
         Acceuil
-      </a>
-      <a className="menu-item" href="/salads">
+      </Link>
+      <Link className="menu-item" to="/sessions">
         Voir ses sessions
-      </a>
-      <a className="menu-item" href="/pizzas">
-        Supprimer son compte
-      </a>
+      </Link>
+      <Link className="menu-item" to="/">
+          Supprimer son compte
+      </Link>
     </Menu>
   );
+  }else{
+    return (<Menu>
+        <Link className="menu-item" to="/">
+          Acceuil
+        </Link>
+      </Menu>);
+  }
+      
+    
+  
 };
 
 export default Sidebar;

@@ -1,6 +1,5 @@
 import React from "react";
 import Banner from "../components/Banner";
-import Menu from "../components/Menu";
 import SessionJoiner from "../components/SessionJoiner";
 import BubbleWindow from "../components/BubbleWindow";
 import SessionData from "../components/SessionData";
