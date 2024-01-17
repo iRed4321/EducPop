@@ -12,8 +12,8 @@ class SessionData extends React.Component {
             <p> - Connectés: </p>
             <p> - Temps restant </p>
             <p> - Diapositives: </p>
-            <wired-button> Nouvelle diapo </wired-button>
-            <wired-button> Clore la session </wired-button>
+            <wired-button id="newDiapositiveButton"> Nouvelle diapo </wired-button>
+            <wired-button id="closeSessionButton"> Clore la session </wired-button>
 
             </div>
         );
