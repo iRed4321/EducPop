@@ -1,3 +1,5 @@
+@import "../Common";
+
 /* Think about copying into a global css file for all pages */
 @font-face {
   font-family: indieFlower;
@@ -11,7 +13,6 @@
     flex-direction: column;
     align-items: center;
     height: 100vh;
-    width: 100vw;
     font-family: indieFlower;
     font-size: 1.5em;
 
@@ -38,12 +39,35 @@
 
 }
 
+#toLoginButton {
+    padding: 0.5em;
+
+}
+
 #knowMore {
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
     width: 100%;
-
+    margin-top: 30vh;
 }
+
+#knowMoreText {
+    padding: 0em;
+    margin: 0em;
+}
+
+#sessionJoinInput {
+    margin-top: 1em;
+    margin-bottom: 2em;
+    width: 50%;
+}
+
+#sessionCreateButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 1em;
+}
+

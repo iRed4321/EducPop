@@ -1,0 +1,15 @@
+
+#bannerContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 4px solid black;
+    border-right: 4px solid black;
+    width: 80%;
+    height: 20%;
+
+    h2 {
+        margin: auto;
+    }
+}
