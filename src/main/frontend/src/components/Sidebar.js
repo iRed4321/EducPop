@@ -46,10 +46,12 @@ const Sidebar = () => {
             <Link className="menu-item" to="/sessions">
             Voir ses sessions
             </Link>
-            <Link className="menu-item" to="/coucouLeo">
-            Se déconnecter
-            </Link>
             <wired-button className="menu-item" onClick={removeUser}>Supprimer son compte</wired-button>
+            <Link className="menu-item" to="/coucouLeo">
+            <wired-button id="disconnectButton">
+            Se déconnecter
+            </wired-button>
+            </Link>
             </Menu>
         );
     }else{
