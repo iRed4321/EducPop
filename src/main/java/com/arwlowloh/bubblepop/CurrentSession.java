@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.tools.Diagnostic;
-
-import com.arwlowloh.bubblepop.model.Diapo;
 import com.arwlowloh.bubblepop.model.Utilisateur;
 
 public class CurrentSession {
@@ -23,34 +20,64 @@ public class CurrentSession {
         diapos.add(new CurrDiapo());
     }
 
+    /**
+     * 
+     * @return l'utilisateur ayant créé la session
+     */
     public Utilisateur getUtilisateur() {
         return utilisateur;
     }
 
+    /**
+     * 
+     * @return le nom de la session
+     */
     public String getNom() {
         return nom;
     }
 
+    /**
+     * 
+     * @return la diapo en cours
+     */
     public CurrDiapo getCurrentDiapo() {
         return diapos.get(currDiapo);
     }
 
+    /**
+     * Ajoute une diao à la liste des diapos
+     */
     public void addDiapo() {
         diapos.add(new CurrDiapo());
     }
 
+    /**
+     * Permet de définir la diapo en cours
+     * @param currDiapo l'indice de la diapo à définir comme courante
+     */
     public void setCurrentDiapo(int currDiapo) {
         this.currDiapo = currDiapo;
     }
 
+    /**
+     * Permet d'obtenir la liste des mots de la diapo en cours
+     * @return
+     */
     public HashMap<String, Integer> getBulles() {
         return diapos.get(currDiapo).getBulles();
     }
 
+    /**
+     * Permet d'obtenir la liste des questions de la diapo en cours
+     * @return
+     */
     public List<String> getQuestions() {
         return diapos.get(currDiapo).getQuestions();
     }
 
+    /**
+     * Permet d'oobtenir la liste des diapos
+     */
     public List<CurrDiapo> getDiapos() {
         return diapos;
     }

@@ -13,14 +13,24 @@ public class CurrDiapo {
     private HashMap<String, Integer> bulles = new HashMap<>();
     private List<String> questions = new ArrayList<>();
 
+    /**
+     * @return la liste des mots de la diapo et leurs occurrences
+     */
     public HashMap<String, Integer> getBulles() {
         return bulles;
     }
 
+    /**
+     * @return la liste des questions de la diapo
+     */
     public List<String> getQuestions() {
         return questions;
     }
 
+
+    /**
+     * Permet de changer une diapo en cours en une diapo enregistrable dans la base de données
+     */
     public Diapo convert(){
         Diapo diapo = new Diapo(new ArrayList<>(), new ArrayList<>());
         

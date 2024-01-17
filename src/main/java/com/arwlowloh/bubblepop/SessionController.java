@@ -32,6 +32,12 @@ public class SessionController {
     @Autowired
     AuthController authController;
 
+    /**
+     * Permet de clore une session et de l'enregistrer dans la base de données
+     * @param id l'identifiant de la session
+     * @param token le token JWT de l'utilisateur
+     * @return ResponseEntity contenant un message en cas d'erreur
+     */
     @GetMapping("/session/{id}/close")
     public ResponseEntity<?> end(@PathVariable String id, @RequestParam(required = false) String token) {
         
@@ -67,6 +73,12 @@ public class SessionController {
 
     }
 
+    /**
+     * Permet de créer une nouvelle session
+     * @param sessionName le nom de la session
+     * @param token le token JWT de l'utilisateur
+     * @return ResponseEntity contenant l'identifiant de la session
+     */
     @GetMapping("/session/open")
     public ResponseEntity<?> createSession(@RequestParam(required = false) String sessionName, @RequestParam(required = false) String token) {
 
@@ -85,6 +97,12 @@ public class SessionController {
         return ResponseEntity.ok(id);
     }
 
+    /**
+     * Permet de récupérer les données d'une session
+     * @param id l'identifiant de la session
+     * @param token le token JWT de l'utilisateur
+     * @return ResponseEntity contenant les données de la session
+     */
     @GetMapping("/session/{id}/update")
     public ResponseEntity<?> update(@PathVariable String id, @RequestParam(required = false) String token) {
 
@@ -107,6 +125,12 @@ public class SessionController {
         return ResponseEntity.ok(Pair.with(session.getQuestions(), session.getBulles()));
     }
 
+    /**
+     * Permet de créer une nouvelle diapo
+     * @param id l'identifiant de la session
+     * @param token le token JWT de l'utilisateur
+     * @return ResponseEntity contenant un message en cas d'erreur
+     */
     @GetMapping("/session/{id}/newDiapo")
     public ResponseEntity<?> newDiapo(@PathVariable String id, @RequestParam(required = false) String token) {
 
@@ -131,6 +155,13 @@ public class SessionController {
 
     }
 
+    /**
+     * Permet de définir la diapo courante
+     * @param id l'identifiant de la session
+     * @param diapo le numéro de la diapo
+     * @param token le token JWT de l'utilisateur
+     * @return ResponseEntity contenant un message en cas d'erreur
+     */
     @GetMapping("/session/{id}/setDiapo")
     public ResponseEntity<?> setDiapo(@PathVariable String id, @RequestParam int diapo, @RequestParam(required = false) String token) {
 
@@ -154,6 +185,13 @@ public class SessionController {
         return ResponseEntity.ok(null);
     }
  
+    /**
+     * Permet de recevoir les données envoyées par les participants
+     * @param id l'identifiant de la session
+     * @param question la question envoyée par un participant
+     * @param word le mot envoyé par un participant
+     * @return ResponseEntity contenant un message en cas d'erreur
+     */
     @GetMapping("/session/{id}/data")
     public ResponseEntity<?> receiveData(
         @PathVariable String id,
