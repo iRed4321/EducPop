@@ -7,16 +7,12 @@ import 'wired-elements';
 import axios from '../axios.js';
 import { useNavigate } from 'react-router-dom';
 
-import "../styles/pages/Home.css";
-import rainforest from "../assets/rainforestAlliance.png"
-import Bcertified from "../assets/Bcertified.png"
-import sybert from "../assets/sybert.png"
-import onePercent from "../assets/1percent.png"
-
-
-class Home extends React.Component {
-  render() {
+import rainforest from "../assets/rainforestAlliance.png";
+import Bcertified from "../assets/Bcertified.png";
+import sybert from "../assets/sybert.png";
+import onePercent from "../assets/1percent.png";
 import "../styles/pages/Home.scss";
+
 
 const Home = () => {
 
@@ -61,6 +57,7 @@ const Home = () => {
           C'est bien. Mais s'occuper de faire en sorte que tout ce passe bien, point de vue logistique, c'est toujours un défi.
           Mais pas avec BubblePop.
         </p>
+        <br/>
         <p>
           Nous sommes <i>Awrlowloh</i>. Une équipe de développeurs et développeuses, certes, mais une équipe de gens passionnés
           non seulement par l'informatique, mais aussi par les questions importantes de notre siècle.
@@ -71,6 +68,7 @@ const Home = () => {
           brassent des sommes astronomique, c'est de répondre à des appels à projets. Qu'ils soient d'ampleur municipale, départementale, régionale ou
           nationale. Ce qu'on veut, c'est aider.
         </p>
+        <br/>
         <p>
           Chez <i>Awrlowloh</i>, nous sommes convaincus que les gens n'ont pas besoin de transactions financières entre eux pour s'entendre et
           faire du monde un endroit meilleur. La motivation que procure la collaboration pure et simple alliée à la passion, c'est ça qui peut faire la différence.
