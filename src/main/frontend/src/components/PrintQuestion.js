@@ -1,13 +1,31 @@
 // PrintQuestion.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DragNDropQuestions from '../components/DragNDropQuestions';
+import axios from '../axios.js';
 
-const PrintQuestion = () => {
-    const questions = [
-        { id: 1, text: 'Question 1' },
-        { id: 2, text: 'Question 2' },
-        { id: 3, text: 'Question 3' },
-    ];
+function PrintQuestion() {
+
+    const [questions, setQuestions] = useState([]);
+
+    useEffect(() => {
+
+        const getQuestions = async () => {
+            let params = new URLSearchParams(document.location.search);
+            let id = params.get("id");
+            const recu = await axios.get("/session/"+id+"/update?token="+localStorage.getItem("accessToken"));
+            const questionsR = recu.data.value0;
+
+            
+            
+            setQuestions(questionsR);
+         };
+
+        getQuestions();
+  
+    }, []);
+
+    var q = questions.map((question, index) => ({ id: index+1, text: question }));
+    console.log(q);
 
     const handleDrop = (questionId) => {
         const newWindow = window.open('', '_blank');
