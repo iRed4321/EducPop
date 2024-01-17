@@ -205,6 +205,10 @@ public class SessionController {
             return new ResponseEntity<>("Session " + id + " not found", HttpStatus.BAD_REQUEST);
         } else {
 
+            if(session.readOnly){
+                return new ResponseEntity<>("Session " + id + " is read only", HttpStatus.BAD_REQUEST);
+            }
+
             if (question != null && word != null) {
                 return new ResponseEntity<>("You can't send both a question and a word at the same time", HttpStatus.BAD_REQUEST);
             }
@@ -243,8 +247,9 @@ public class SessionController {
             if (session.getId() == id) {
                 long rd = (long) (Math.random() * 1000000000);
                 String squidId = sqids.encode(List.of(rd));
-
-                sessions.put(squidId, new CurrentSession(session));
+                CurrentSession loaded = new CurrentSession(session);
+                loaded.readOnly = true;
+                sessions.put(squidId, loaded);
         
                 return ResponseEntity.ok(squidId);
             }

@@ -10,6 +10,7 @@ import com.arwlowloh.bubblepop.model.Utilisateur;
 public class CurrentSession {
 
     Utilisateur utilisateur;
+    Boolean readOnly = false;
     String nom;
     private List<CurrDiapo> diapos;
     private int currDiapo = 0;
