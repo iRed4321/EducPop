@@ -10,22 +10,19 @@ import { useState } from 'react';
 
 
 const CreateAccount = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-    passwordConfirm: ''
-  });
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  
+  let usernameInput = React.createRef();
+  let passwordInput = React.createRef();
+  let passwordConfirmInput = React.createRef();
 
   const handleSignUp = async (e) => {
     //axios.post("/api/auth/perform_login2").catch(err => console.log(err));
       try {
+        let formData = { };
+        formData.username = usernameInput.current.value;
+        formData.password = passwordInput.current.value;
+        formData.passwordConfirm = passwordConfirmInput.current.value;
         const response = await axios.post("/api/auth/perform_signup", formData);
         console.log(response.data);
         //const token = response.data.token; 
@@ -43,20 +40,12 @@ const CreateAccount = () => {
         </div>
         <div id="createAccountBody">
           <label id="usernameLabel" htmlFor='username'> Nom d'utilisateur </label>
-          <wired-input id="username" placeholder="Nom d'utilisateur"></wired-input>
+          <wired-input id="username" placeholder="Nom d'utilisateur" ref={usernameInput}></wired-input>
           <label id="passwordLabel" htmlFor='password'>Mot de passe</label>
-          <wired-input type="password" id="password" placeholder="Mot de passe"></wired-input>
+          <wired-input type="password" id="password" placeholder="Mot de passe" ref={passwordInput}></wired-input>
           <label id="passwordConfirmLabel" htmlFor='passwordConfirm'>Confirmation de mot de passe</label>
-          <wired-input id="passwordConfirm"type="password" placeholder="Confirmation de mot de passe"></wired-input>
-          <wired-button id="createAccountButton">Créer un compte</wired-button> 
-          {/*
-          <label htmlFor='username'> Nom d'utilisateur </label>
-          <input id="username" name="username" value={formData.username} onChange={handleChange} placeholder="Nom d'utilisateur"></input>
-          <label htmlFor='password'>Mot de passe</label>
-          <input type="password" name="password" id="password" value={formData.password} onChange={handleChange} placeholder="Mot de passe"></input>
-          <label htmlFor='passwordConfirm'>Confirmation de mot de passe</label>
-          <input type="password" id="passwordConfirm" name="passwordConfirm" value={formData.passwordConfirm} onChange={handleChange} placeholder="Confirmation de mot de passe"></input>
-          <wired-button onClick={handleSignUp}>Créer un compte</wired-button>*/}
+          <wired-input id="passwordConfirm"type="password" placeholder="Confirmation de mot de passe" ref={passwordConfirmInput}></wired-input>
+          <wired-button  onClick={handleSignUp} id="createAccountButton">Créer un compte</wired-button> 
         </div>
 
       </div>

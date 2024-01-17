@@ -1,10 +1,10 @@
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: fixed;
-  width: 1em;
-  height: 1em;
-  left: 1em;
-  top: 1em;
+  width: 1.5em;
+  height: 1.5em;
+  left: 1.5em;
+  top: 1.3em;
 }
 
 /* Color/shape of burger icon bars */
@@ -74,7 +74,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .bm-item:hover {
-  color: #ffffff;
+  color: #90DBF4;
 }
 
 /* Styling of overlay */

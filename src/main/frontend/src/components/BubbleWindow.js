@@ -9,6 +9,19 @@ import "../styles/components/BubbleWindow.scss";
 
 function sketch(p) {
 
+    function createHiPPICanvas(width, height) {
+    const ratio = window.devicePixelRatio;
+    const canvas = document.createElement("canvas");
+
+    canvas.width = width * ratio;
+    canvas.height = height * ratio;
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
+    canvas.getContext("2d").scale(ratio, ratio);
+
+    return canvas;
+    }
+
     // set the canvas size to the size of the container
     let canvasWidth = document.getElementById("bubbleWindowContainer").offsetWidth;
     let canvasHeight = document.getElementById("bubbleWindowContainer").offsetHeight;
@@ -33,20 +46,22 @@ function sketch(p) {
       var ctx = p.canvas.getContext('2d');
       canvas.width = canvasWidth - 20;
       canvas.height = canvasHeight - 20;
+      canvas.style.width = canvasWidth - 20;
+      canvas.style.height = canvasHeight - 20;
       
+      let fontSize = "1.6rem";
 
       for (var i = 0; i < words.length; i++) {
         var word = words[i];
         if (words_and_placed[word]) {
             let [y,x,radiusX,radiusY] = words_pos[word];
-            // set up the outline to 333 and the inside to white
 
             ctx.beginPath();
             ctx.ellipse(x, y, radiusX, radiusY, 0, 0, 2 * Math.PI); // Use 'ellipse' instead of 'arc'
             ctx.fillWidth = 3;
             ctx.stroke();
             words_pos[word] = [y,x,radiusX,radiusY];
-            ctx.font = '48px indieFlower'; 
+            ctx.font = fontSize + ' indieFlower';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillText(word, x, y);
@@ -97,7 +112,7 @@ function sketch(p) {
           ctx.fill();
 
           ctx.fillStyle = '#fff';
-          ctx.font = '48px sans-serif';
+          ctx.font = fontSize + ' indieFlower';
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
           ctx.fillText(word, x, y);

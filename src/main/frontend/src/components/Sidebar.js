@@ -7,7 +7,7 @@ const Sidebar = () => {
   return (
     <Menu>
       <a className="menu-item" href="/">
-        Home
+        Acceuil
       </a>
       <a className="menu-item" href="/salads">
         Voir ses sessions
