@@ -6,6 +6,7 @@ import Connect from './pages/Connect';
 import GuestSession from './pages/GuestSession';
 import NotFound404 from './pages/NotFound404';
 import PrintQuestion from "./pages/PrintQuestion";
+import SessionList from "./pages/SessionList";
 import DragNDropQuestions from "./components/DragNDropQuestions";
 
 class App extends Component {
@@ -32,6 +33,7 @@ class App extends Component {
               <Route path="/signup" element={<CreateAccount/>}/>
               <Route path="/guest" element={<GuestSession/>}/>
               <Route path="/question" element={<PrintQuestion/>}/>
+              <Route path="/sessions" element={<SessionList/>}/>
               <Route path="*" element={<NotFound404/>}/>
             </Routes>
           </div>

@@ -1,9 +1,12 @@
+/* Think about copying into a global css file for all pages */
 @font-face {
-    font-family: indieFlower;
-    src: url("../../assets/IndieFlower.ttf");
-  }
-  
-#connectPage {
+  font-family: indieFlower;
+  src: url("../../assets/IndieFlower.ttf");
+}
+
+
+#sessionPage {
+    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,31 +14,40 @@
     width: 100vw;
     font-family: indieFlower;
     font-size: 1.5em;
+
 }
 
-#connectButton{
-    color: aqua;
-    font-size: 4em;
-    font-family: inherit;
-}
+#sessionHeader {
 
-#connectHeader {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
+
 }
 
-#returnHome {
-    display: flex;
-    flex-direction: row;
-}
 
-#connectBody {
+#sessionBody {
+
     display: flex;
     flex-direction: column;
     align-items: center;
     align-content: center;
     width: 100%; 
     height: 100%;
+
+}
+
+ul {
+    list-style-type: none;
+  }
+
+#knowMore {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
 }
