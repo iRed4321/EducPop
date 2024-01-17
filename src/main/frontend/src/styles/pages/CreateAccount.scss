@@ -1,0 +1,65 @@
+@import "../Common";
+
+#createAccountPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+#createAccountHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#createAccountBody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    width: 33%;
+    height: 100%;
+}
+
+label {
+    font-family: 'indieFlower' !important;
+    font-size: 1.2rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+#createAccountButton {
+    font-family: 'indieFlower' !important;
+    font-size: 2rem !important;
+    margin-top: 1.5rem !important;
+}
+
+#username {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0;
+}
+
+#usernameLabel {
+    align-self: flex-start;
+}
+
+#password {
+    margin-bottom: 1.5rem;
+}
+
+#passwordLabel {
+    align-self: flex-start;
+}
+
+#passwordConfirm {
+    margin-bottom: 1.5rem;
+}
+
+#passwordConfirmLabel {
+    align-self: flex-start;
+}
+
+
+

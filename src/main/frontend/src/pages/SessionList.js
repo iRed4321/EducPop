@@ -1,15 +1,23 @@
-import React, { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import "./styles.css";
+import React from 'react';
+//import { Link } from "react-router-dom";
+import DownArrow from "../components/DownArrow"
+import Banner from "../components/Banner";
+import ListAndSearch from "../components/ListAndSearch";
+import 'wired-elements';
 
-//import  from "../components";
+import "../styles/pages/SessionList.css";
 
-const root = createRoot(document.getElementById("root"));
-root.render(
-  <StrictMode>
-    <Banner>
+const SessionList = () => {
+    return (
+      <div id="sessionPage">
+        <div id="sessionHeader"></div>
+        {/* <Banner>
+            <h1>Vos sessions</h1>
+        </Banner> */}
         <h1>Vos sessions</h1>
-    </Banner>
-    <ListAndSearch/>
-  </StrictMode>
-);
+        <ListAndSearch/>
+      </div>
+    );
+}
+
+export default SessionList;

@@ -3,7 +3,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import logo from '../assets/bubblepop.png'
-import "../styles/components/Logo.css";
+import "../styles/components/Logo.scss";
 
 class Logo extends React.Component {
   render() {

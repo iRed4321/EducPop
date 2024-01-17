@@ -1,0 +1,90 @@
+@import "../Common";
+
+#connectPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+#returnHomeText {
+    font-family: 'indieFlower';
+    font-size: 1.3em;
+    padding-right: 0.5em;
+    padding-top: 0.3em;
+}
+
+#connectHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#createAccountText {
+    font-family: 'indieFlower';
+    font-size: 2em;
+}
+
+#returnHome {
+    display: flex;
+    flex-direction: row;
+}
+
+#connectBody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    height: 100%;
+    width: 40%;
+
+}
+
+wired-input {
+    width: 100%;
+
+}
+
+#usernameLabel {
+
+    font-size: 1.3em;
+    font-family: 'indieFlower';
+    align-self: flex-start;
+    padding-bottom: 0.3em;
+}
+
+#passwordLabel {
+    font-family: 'indieFlower';
+    font-size: 1.3em;
+    align-self: flex-start;
+    padding-bottom: 0.3em;
+}
+
+#username {
+
+    margin-bottom: 2em;
+
+}
+
+#password {
+
+    margin-bottom: 8em;
+
+}
+
+#connectButton {
+
+    margin-bottom: 1em;
+    font-size: 2em;
+    font-family: 'indieFlower';
+    
+
+}
+
+#returnHomeButton {
+
+    font-family: 'indieFlower';
+    color: black;
+}

@@ -1,1 +1,0 @@
-// Bouton avec le symbole de trois barres qui, quand on clique dessus, affiche un bandeau latéral avec une liste de pages que l'on peut rejoindre quand on clique dessus

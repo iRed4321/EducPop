@@ -3,10 +3,15 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import NotFound404 from "./pages/NotFound404";
 import Connect from "./pages/Connect"
 import CreateAccount from "./pages/CreateAccount"
+import HostSession from "./pages/HostSession"
 import Home from "./pages/Home"
 
-import "./styles/App.css"
+import "./styles/App.scss"
 import GuestSession from './pages/GuestSession';
+import SessionList from "./pages/SessionList";
+import DragNDropQuestions from "./components/DragNDropQuestions";
+
+// <Route path="/question" element={<PrintQuestion/>}/>
 
 class App extends Component {
   state = {
@@ -27,10 +32,11 @@ class App extends Component {
           <div>
             <Routes>
               <Route path="/" element={<Home/>}/>
-              <Route path="/signin" element={<CreateAccount/>}/>
-              <Route path="/login" element={<Connect/>}/>
               <Route path="/signup" element={<CreateAccount/>}/>
+              <Route path="/login" element={<Connect/>}/>
               <Route path="/guest" element={<GuestSession/>}/>
+              <Route path="/host_session" element={<HostSession/>}/>
+              <Route path="/sessions" element={<SessionList/>}/>
               <Route path="*" element={<NotFound404/>}/>
             </Routes>
           </div>
@@ -56,5 +62,7 @@ export default App;
             </div>
           </header>
         </div>
-
-*/
+    );
+  }
+}
+export default App; */

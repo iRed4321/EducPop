@@ -1,0 +1,16 @@
+
+#dropZone{
+    border: 0.15rem dashed #ccc;
+    padding: 0.15rem;
+    margin-top: 30%;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#question{
+    border: 1px solid black;
+    margin-bottom: 8px;
+    padding: 8px;
+    cursor: move;
+}

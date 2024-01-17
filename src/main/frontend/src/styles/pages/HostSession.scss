@@ -1,0 +1,26 @@
+@import "../Common";
+
+html{
+    font-family: "indieFlower" !important;
+}
+
+#hostSessionPage {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+#dataAndQuestionsDropContainer {
+    display: flex;
+    flex-direction: column;
+    width: 24.5%;
+    height: 100%;
+    border-right: 4px solid black;
+}
+
+#hostSessionBody {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
