@@ -6,14 +6,15 @@ import ListAndSearch from "../components/ListAndSearch";
 import 'wired-elements';
 
 import "../styles/pages/SessionList.css";
+import Sidebar from '../components/Sidebar';
 
 const SessionList = () => {
     return (
       <div id="sessionPage">
-        <div id="sessionHeader"></div>
-        {/* <Banner>
-            <h1>Vos sessions</h1>
-        </Banner> */}
+        <div id="sessionHeader">
+          {/* <Sidebar></Sidebar> */}
+            
+        </div>
         <h1>Vos sessions</h1>
         <ListAndSearch/>
       </div>
