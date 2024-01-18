@@ -35,6 +35,12 @@ public class Question {
         this.diapo = diapo;
     }
 
+    public Question(String message, Diapo diapo) {
+        super();
+        this.message = message;
+        this.diapo = diapo;
+    }
+
     public long getId() {
         return id;
     }

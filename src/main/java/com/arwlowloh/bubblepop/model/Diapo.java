@@ -38,13 +38,18 @@ public class Diapo {
         super();
     }
 
+    public Diapo(Session session) {
+        super();
+        this.session=session;
+    }
+
     public Diapo(List<Bulle> bulles, List<Question> questions) {
         super();
         this.bulles = bulles;
         this.questions = questions;
     }
 
-    
+
     public List<Bulle> getBulles() {
         return bulles;
     }

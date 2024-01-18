@@ -31,6 +31,13 @@ public class Bulle {
         super();
     }
 
+    public Bulle(Diapo diapo, String mot, int taille) {
+        super();
+        this.diapo=diapo;
+        this.taille=taille;
+        this.mot=mot;
+    }
+
     public long getId() {
         return id;
     }
