@@ -34,7 +34,16 @@ const SessionData = () => {
             console.log(error);
         }
     }
-
+    
+    const openViewer = async () => {
+        try {
+            let params = new URLSearchParams(document.location.search);
+            var url = "/viewer?id="+params.get("id");
+            window.open(url, "_blank", "noreferrer");
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <div id="sessionDataContainer">
@@ -44,6 +53,7 @@ const SessionData = () => {
         <p> - Diapositives: </p>
         <wired-button id="newDiapositiveButton" onClick={newDiapo}> Nouvelle diapo </wired-button>
         <wired-button id="closeSessionButton" onClick={closeSession}> Clore la session </wired-button>
+        <wired-button id="closeSessionButton" onClick={openViewer}> Ouvrir Viewer </wired-button>
 
         </div>
     );
