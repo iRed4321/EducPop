@@ -29,6 +29,16 @@ const Home = () => {
         }
     }
 
+    const dataWritten = React.createRef();
+
+    const handleSendData = async (e) => {
+        try {
+            navigate("/guest?id="+dataWritten.current.value);
+        } catch (error) {
+            
+        }
+    }
+
     return (
       <div id="homePage">
         <div id="homeHeader">
@@ -44,7 +54,8 @@ const Home = () => {
         
         <div id='homeBody'>
           <p>Rejoindre une session</p>
-          <wired-input id="sessionJoinInput" placeholder="ID de la session"></wired-input>
+          <wired-input id="sessionJoinInput" className="sessionJoinInput" placeholder={"ID de la session"} ref={dataWritten}></wired-input>
+          <wired-button className="sessionJoinButton" onClick={handleSendData}>Rejoindre</wired-button>
           <wired-button id="sessionCreateButton" onClick={handleCreateAccount}>Créer une session</wired-button>
           <div id='knowMore'>
           <p id="knowMoreText">En savoir plus</p>
