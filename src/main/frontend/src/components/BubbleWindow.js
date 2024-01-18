@@ -192,7 +192,7 @@ const BubbleWindow = () => {
 
   return (
     <div id="bubbleWindowContainer">
-      <ReactP5Wrapper sketch={sketch} />
+      <ReactP5Wrapper sketch={(p) => sketch(p)} />
       <div id="bubbleWindowButtons">
         <wired-icon-button id="bubbleWindowButtonPrev" onClick={prevDiapo}> ←  </wired-icon-button>
         <wired-icon-button id="bubbleWindowButtonNext" onClick={nextDiapo}> → </wired-icon-button>
