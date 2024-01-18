@@ -17,9 +17,7 @@ import HostSession from "./HostSession";
 
 const PreHostSession = () => {
     
-    let params = new URLSearchParams(document.location.search);
-    var url = "/viewer?id="+params.get("id");
-    window.open(url, "_blank", "noreferrer");
+
 
     return (
         <HostSession></HostSession>
