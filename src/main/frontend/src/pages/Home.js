@@ -56,7 +56,11 @@ const Home = () => {
           <p>Rejoindre une session</p>
           <wired-input id="sessionJoinInput" className="sessionJoinInput" placeholder={"ID de la session"} ref={dataWritten}></wired-input>
           <wired-button className="sessionJoinButton" onClick={handleSendData}>Rejoindre</wired-button>
-          <wired-button id="sessionCreateButton" onClick={handleCreateAccount}>Créer une session</wired-button>
+          { 
+            localStorage.getItem("accessToken") ? 
+               <wired-button id="sessionCreateButton" onClick={handleCreateAccount}>Créer une session</wired-button>
+               : <div></div>
+          }
           <div id='knowMore'>
           <p id="knowMoreText">En savoir plus</p>
           <DownArrow />

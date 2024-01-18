@@ -43,7 +43,7 @@ const SessionData = () => {
         } catch (error) {
             console.log(error);
         }
-    }
+    } 
 
     return (
         <div id="sessionDataContainer">
