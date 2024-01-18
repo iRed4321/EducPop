@@ -2,7 +2,11 @@ package com.arwlowloh.bubblepop.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -18,10 +22,12 @@ public class Diapo {
     @GeneratedValue
     private long id;
 
-    @OneToMany(mappedBy="diapo")
+    @JsonIgnore
+    @OneToMany(mappedBy="diapo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Bulle> bulles;
 
-    @OneToMany(mappedBy="diapo")
+    @JsonIgnore
+    @OneToMany(mappedBy="diapo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Question> questions;
 
     @ManyToOne
@@ -38,6 +44,7 @@ public class Diapo {
         this.questions = questions;
     }
 
+    
     public List<Bulle> getBulles() {
         return bulles;
     }

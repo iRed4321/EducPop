@@ -67,7 +67,10 @@ public class SessionController {
             diapos.add(dbDiapo);
         }
 
+        System.out.println("diapos :"+diapos);
+
         dbSession.setDiapos(diapos);
+        System.out.println("diapos :"+dbSession.getDiapos());
 
         repo.save(dbSession);
 
@@ -124,7 +127,7 @@ public class SessionController {
         if (user.getId() != session.getUtilisateur().getId()) {
             return new ResponseEntity<>("You can't access this session results", HttpStatus.UNAUTHORIZED);
         }
-
+        
         return ResponseEntity.ok(Pair.with(session.getQuestions(), session.getBulles()));
     }
 
@@ -294,9 +297,11 @@ public class SessionController {
     public ResponseEntity<?> savedlist(@RequestParam(required = false) String token) {
 
         Utilisateur user = authController.loginFromToken(token);
-        List<Session> sessionsdb = user.getSessions();
+        //List<Session> sessionsdb = user.getSessions();
+        List<Session> sessionsdb = repo.findByUtilisateurId(user.getId());
 
         List<CurrentSession> curr = new ArrayList<>();
+        //List<Session> sessionsdb = new ArrayList<>();
 
         /*for (Session sessdb : sessionsdb){
             CurrentSession sess = new CurrentSession(sessdb);

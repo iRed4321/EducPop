@@ -17,14 +17,17 @@ public class CurrentSession {
     Long dbId = null;
 
     CurrentSession(Utilisateur utilisateur, String nom) {
-        this.utilisateur = utilisateur;
+        Utilisateur utilisateur2 = new Utilisateur(utilisateur.getNom(),utilisateur.getMot_de_passe(),utilisateur.getRole(),utilisateur.getId());
+        this.utilisateur = utilisateur2;
         this.nom = nom;
         this.diapos = new ArrayList<>();
         diapos.add(new CurrDiapo());
     }
 
     CurrentSession(Session session){
-        this.utilisateur = session.getUtilisateur();
+        Utilisateur utilisateur = session.getUtilisateur();
+        Utilisateur utilisateur2 = new Utilisateur(utilisateur.getNom(),utilisateur.getMot_de_passe(),utilisateur.getRole(),utilisateur.getId());
+        this.utilisateur = utilisateur2;
         this.nom = session.getNom();
         this.diapos = new ArrayList<>();
         this.dbId = session.getId();

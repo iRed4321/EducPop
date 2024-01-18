@@ -35,14 +35,8 @@ async function sketch(p) {
     localStorage.removeItem("words_pos");
     localStorage.removeItem("words_and_placed");
   }
-  // var recu = await axios.get("/session/" + id + "/update?token=" + localStorage.getItem("accessToken"));
-  // var words = recu.data.value1;
-
-  var words = {
-      "bonjour": 1,
-      "salut": 2,
-      "Guten Tag": 5,
-  };
+  var recu = await axios.get("/session/" + id + "/update?token=" + localStorage.getItem("accessToken"));
+  var words = recu.data.value1;
 
 
 

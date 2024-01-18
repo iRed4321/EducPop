@@ -15,7 +15,6 @@ const ListAndSearch = () => {
     let navigate = useNavigate();
 
     const [sessionsData, setSessionData]=useState([]);
-    var sessions = [];
 
     useEffect(() => {
         const getInfo = async () => {
@@ -23,6 +22,7 @@ const ListAndSearch = () => {
             try {
                 const response = await axios.get("/session/saved?token="+token);
                 setSessionData(response.data);
+                console.log(response.data);
             } catch (error) {
                 //there is an error
                 console.error('Problem fetching sessions :', error.message);
@@ -30,7 +30,7 @@ const ListAndSearch = () => {
              
         }
         getInfo();
-    });
+    },[]);
     
     const handleGoToSession = async (id,e) => {
       var token=localStorage.getItem("accessToken");
@@ -44,15 +44,12 @@ const ListAndSearch = () => {
       }
     }
 
-
-
-      
-      const listItems = sessionsData.map((session) =>    <li key={session.nom}><wired-button onClick={(e) => handleGoToSession(session.id, e)}>{session.nom}</wired-button></li>  );
+      const listItems = sessionsData.map((session) => <li key={session.id}><wired-button onClick={(e) => handleGoToSession(session.id, e)}>{(session.nom==undefined)?"Session "+session.id:session.nom}</wired-button></li>  );
     
         return (
           <div id="connectPage">
             <div id="connectHeader">
-            <ul>{listItems}</ul> 
+            <ul>{listItems}</ul>
             </div>
           </div>
         );

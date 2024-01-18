@@ -1,7 +1,9 @@
 package com.arwlowloh.bubblepop.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -11,6 +13,8 @@ import jakarta.persistence.JoinColumn;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "utilisateur")
@@ -34,7 +38,8 @@ public class Utilisateur {
     private Organisation organisation;
 
     @JsonIgnore
-    @OneToMany(mappedBy="utilisateur")
+    @JsonIgnoreProperties("utilisateur")
+    @OneToMany(mappedBy="utilisateur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Session> sessions;
 
     public Utilisateur() {
@@ -43,6 +48,14 @@ public class Utilisateur {
 
     public Utilisateur(String nom, String mot_de_passe, String role) {
         super();
+        this.nom = nom;
+        this.mot_de_passe = mot_de_passe;
+        this.role = role;
+    }
+
+    public Utilisateur(String nom, String mot_de_passe, String role,Long id) {
+        super();
+        this.id=id;
         this.nom = nom;
         this.mot_de_passe = mot_de_passe;
         this.role = role;
@@ -88,10 +101,12 @@ public class Utilisateur {
         this.organisation = organisation;
     }
 
+    @JsonIgnore
     public List<Session> getSessions() {
         return sessions;
     }
 
+    @JsonProperty
     public void setSessions(List<Session> sessions) {
         this.sessions = sessions;
     }
