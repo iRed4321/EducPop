@@ -13,30 +13,18 @@ import { useState, useEffect } from "react";
 
 import "../styles/pages/HostSession.scss";
 import axios from "../axios";
+import HostSession from "./HostSession";
 
-const HostSession = () => {
-
+const PreHostSession = () => {
+    
     let params = new URLSearchParams(document.location.search);
-    let id = params.get("id");
+    var url = "/viewer?id="+params.get("id");
+    window.open(url, "_blank", "noreferrer");
 
     return (
-        <div id="hostSessionPage">
-        <Banner>
-        <Sidebar></Sidebar>
-        <SessionJoiner code={id}></SessionJoiner>
-        </Banner>
-        <div id="hostSessionBody">
-        <BubbleWindow></BubbleWindow>
-        <div id="dataAndQuestionsDropContainer">
-        <SessionData></SessionData>
-        <DragNDropQuestions displayDropZone={true}> </DragNDropQuestions>
-        </div>
-        <PrintQuestion displayDropZone={false}></PrintQuestion>
-        </div>
-        <BigQuestionPopUp></BigQuestionPopUp>
-        </div>
+        <HostSession></HostSession>
     );
 
 }
 
-export default HostSession;
+export default PreHostSession;

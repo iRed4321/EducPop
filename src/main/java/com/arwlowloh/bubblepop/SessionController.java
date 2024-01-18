@@ -333,4 +333,49 @@ public class SessionController {
         return new ResponseEntity<>("Session not found", HttpStatus.BAD_REQUEST);
     }
 
+    @GetMapping("/session/{id}/setViewerOpened")
+    public ResponseEntity<?> setViewerOpened(@PathVariable String id, @RequestParam(required = false) String token) {
+
+        CurrentSession session = sessions.get(id);
+
+        if (session == null) {
+            return new ResponseEntity<>("Session " + id + " not found", HttpStatus.BAD_REQUEST);
+        } 
+
+        Utilisateur user = authController.loginFromToken(token);
+
+        if (user == null || user.getId() != session.getUtilisateur().getId()) {
+            return new ResponseEntity<>("You are not the owner of this session", HttpStatus.UNAUTHORIZED);
+        }
+
+        if (user.getId() != session.getUtilisateur().getId()) {
+            return new ResponseEntity<>("You are not the owner of this session", HttpStatus.UNAUTHORIZED);
+        }
+
+        session.viewerOpened = true;
+        return ResponseEntity.ok(null);
+    }
+
+    @GetMapping("/session/{id}/viewerOpened")
+    public ResponseEntity<?> viewerOpened(@PathVariable String id, @RequestParam(required = false) String token) {
+
+        CurrentSession session = sessions.get(id);
+
+        if (session == null) {
+            return new ResponseEntity<>("Session " + id + " not found", HttpStatus.BAD_REQUEST);
+        } 
+
+        Utilisateur user = authController.loginFromToken(token);
+
+        if (user == null || user.getId() != session.getUtilisateur().getId()) {
+            return new ResponseEntity<>("You are not the owner of this session", HttpStatus.UNAUTHORIZED);
+        }
+
+        if (user.getId() != session.getUtilisateur().getId()) {
+            return new ResponseEntity<>("You are not the owner of this session", HttpStatus.UNAUTHORIZED);
+        }
+
+        return ResponseEntity.ok(session.viewerOpened);
+    }
+
 }

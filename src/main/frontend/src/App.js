@@ -5,11 +5,13 @@ import Connect from "./pages/Connect"
 import CreateAccount from "./pages/CreateAccount"
 import HostSession from "./pages/HostSession"
 import Home from "./pages/Home"
+import ViewerTab from './pages/ViewerTab';
 
 import "./styles/App.scss"
 import GuestSession from './pages/GuestSession';
 import SessionList from "./pages/SessionList";
 import DragNDropQuestions from "./components/DragNDropQuestions";
+import PreHostSession from './pages/PreHostSession';
 
 // <Route path="/question" element={<PrintQuestion/>}/>
 
@@ -35,8 +37,9 @@ class App extends Component {
               <Route path="/signup" element={<CreateAccount/>}/>
               <Route path="/login" element={<Connect/>}/>
               <Route path="/guest" element={<GuestSession/>}/>
-              <Route path="/host_session" element={<HostSession/>}/>
+              <Route path="/host_session" element={<PreHostSession/>}/>
               <Route path="/sessions" element={<SessionList/>}/>
+              <Route path="/viewer" element={<ViewerTab/>}/>
               <Route path="*" element={<NotFound404/>}/>
             </Routes>
           </div>

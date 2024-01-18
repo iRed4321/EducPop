@@ -59,7 +59,7 @@ mvn clean
 mvn clean
 mvn spring-boot:run
 ```
-Then, open an other terminal and enter theses commands:
+Then, open an other terminal and enter these commands:
 
 ```bash
 cd src/main/frontend

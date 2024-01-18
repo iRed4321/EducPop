@@ -159,7 +159,7 @@ const BubbleWindow = () => {
 
   useEffect(() => {
 
-
+    
     const interval = setInterval(() => setTime(Date.now()), 1000);
     return () => {
       clearInterval(interval);

@@ -10,8 +10,6 @@ import "../styles/components/DragNDropQuestions.scss";
 
 
 const DragNDropQuestions = ({ displayDropZone, questions = [], onDrop }) => {
-    console.log('I re-rendered');
-    console.log(questions);
     const moveQuestion = (fromIndex, toIndex) => {
         const newQuestions = [...questions];
         const [removed] = newQuestions.splice(fromIndex, 1);

@@ -58,11 +58,7 @@ const Sidebar = () => {
             Voir ses sessions
             </Link>
             <wired-button id="deleteAccountButton" className="menu-item" onClick={removeUser}>Supprimer son compte </wired-button>
-            <Link className="menu-item" to="/coucouLeo">
-            <wired-button id="disconnectButton">
-            Se déconnecter
-            </wired-button>
-            </Link>
+            <wired-button className="menu-item" onClick={logOut}>Se déconnecter</wired-button>
             </Menu>
         );
     }else{
