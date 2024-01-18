@@ -62,7 +62,7 @@ public class DatabaseLoader implements CommandLineRunner {
 		this.utilisateurRepository.save(elea);
 		this.utilisateurRepository.save(leo);
 
-		Session session1 = new Session("Feuille",elea);
+		Session session1 = new Session("Feuille",leo);
 		session1.addDiapo();
 		Diapo diapo1=new Diapo(session1);
 		this.sessionRepository.save(session1);
